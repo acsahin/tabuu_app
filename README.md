@@ -1,6 +1,6 @@
-# tabuu_app
+# Tabu App
 
-Tabuu flutter application.
+Tabu flutter application.
 
 ## Getting Started
 

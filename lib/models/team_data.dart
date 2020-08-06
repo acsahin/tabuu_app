@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TeamData extends ChangeNotifier{
-  List<Color> teamColors = [Colors.orange, Colors.grey, Colors.yellow, Colors.indigo];
+  List<Color> teamColors = [Colors.orange[300], Colors.grey, Colors.yellow[900], Colors.indigo];
   List<IconData> teamIcons = [Icons.offline_bolt, Icons.whatshot, Icons.toys, Icons.airplanemode_active, Icons.audiotrack];
   Color team1Color = Colors.red;
   Color team2Color = Colors.green;

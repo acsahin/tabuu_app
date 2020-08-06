@@ -11,9 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.grey
-
       ),
-      title: 'Tabuu TR',
+      title: 'Tabu TR',
       home: SafeArea(
         child: MainScreen(),
       ),

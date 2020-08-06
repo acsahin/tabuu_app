@@ -9,7 +9,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.grey
+
+      ),
       title: 'Tabuu TR',
       home: SafeArea(
         child: MainScreen(),

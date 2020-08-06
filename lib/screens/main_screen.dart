@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:tabuu_app/models/team_data.dart';
+
+enum TeamNumber {
+  team1,
+  team2,
+}
 
 class MainScreen extends StatelessWidget {
   @override
@@ -38,73 +45,77 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class SettingsDialog extends StatelessWidget {
+class SettingsDialog extends StatefulWidget {
+  @override
+  _SettingsDialogState createState() => _SettingsDialogState();
+}
+
+class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
-    return SimpleDialog(
-      contentPadding: EdgeInsets.all(0.0),
-      backgroundColor: Colors.grey[600],
-      children: <Widget>[
-        TeamCard(
-          teamColor: Colors.green,
-          teamIcon: Icons.games,
-        ),
-        TeamCard(
-          teamColor: Colors.red,
-          teamIcon: Icons.offline_bolt,
-        )
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => TeamData(),
+      child: SimpleDialog(
+        contentPadding: EdgeInsets.all(0.0),
+        backgroundColor: Colors.grey[600],
+        children: <Widget>[
+          TeamCard(
+            selectedTeam: TeamNumber.team1,
+          ),
+          TeamCard(
+            selectedTeam: TeamNumber.team2,
+          ),
+        ],
+      ),
     );
   }
 }
 
-class TeamCard extends StatefulWidget {
-  Color teamColor;
-  IconData teamIcon;
+class TeamCard extends StatelessWidget {
+  final TeamNumber selectedTeam;
 
-  TeamCard({this.teamColor, this.teamIcon});
+  TeamCard({this.selectedTeam});
 
-  @override
-  _TeamCardState createState() => _TeamCardState();
-}
-
-class _TeamCardState extends State<TeamCard> {
-  @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(0.0),
-      color: widget.teamColor,
-      elevation: 0.0,
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: GestureDetector(
-            onTap: () {
-              setState(() {
-                widget.teamIcon = Icons.ac_unit;
-                widget.teamColor = Colors.lightBlueAccent;
-              });
-            },
-            child: Icon(widget.teamIcon),
-          ),
-          title: TextField(
-            decoration: InputDecoration(
-              hintText: 'Team Name',
-              border: InputBorder.none,
+    return GestureDetector(
+      onTap: () {
+        selectedTeam == TeamNumber.team1
+            ? Provider.of<TeamData>(context, listen: false).changeTeam1Color()
+            : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
+      },
+      child: Consumer<TeamData>(
+        builder: (context, teamData, child) {
+          return Card(
+            margin: EdgeInsets.all(0.0),
+            color: selectedTeam == TeamNumber.team1
+                ? teamData.team1Color
+                : teamData.team2Color,
+            elevation: 0.0,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Icon(Icons.offline_bolt),
+                title: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Team Name',
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.grey[200],
+                  textCapitalization: TextCapitalization.characters,
+                  style: TextStyle(
+                    fontSize: 24.0,
+                  ),
+                ),
+                subtitle: Text(
+                  'Team starts with the color',
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
             ),
-            cursorColor: Colors.grey[200],
-            textCapitalization: TextCapitalization.characters,
-            style: TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-          subtitle: Text(
-            'Team starts with the color',
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

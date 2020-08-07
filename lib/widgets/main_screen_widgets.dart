@@ -34,10 +34,14 @@ class TeamCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (detail) {
-        selectedTeam == TeamNumber.team1 ? Provider.of<TeamData>(context, listen: false).changeTeam1Color() : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
+        selectedTeam == TeamNumber.team1
+            ? Provider.of<TeamData>(context, listen: false).changeTeam1Color()
+            : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
       },
       onTap: () {
-        selectedTeam == TeamNumber.team1 ? Provider.of<TeamData>(context, listen: false).changeTeam1Icon() : Provider.of<TeamData>(context, listen: false).changeTeam2Icon();
+        selectedTeam == TeamNumber.team1
+            ? Provider.of<TeamData>(context, listen: false).changeTeam1Icon()
+            : Provider.of<TeamData>(context, listen: false).changeTeam2Icon();
       },
       child: Consumer<TeamData>(
         builder: (context, teamData, child) {
@@ -56,7 +60,9 @@ class TeamCard extends StatelessWidget {
               ),
               title: TextField(
                 decoration: InputDecoration(
-                  hintText: selectedTeam == TeamNumber.team1 ? '1. Takım' : '2. Takım',
+                  hintText: selectedTeam == TeamNumber.team1
+                      ? '1. Takım'
+                      : '2. Takım',
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.grey[200],
@@ -65,12 +71,6 @@ class TeamCard extends StatelessWidget {
                   fontSize: 24.0,
                 ),
               ),
-//              subtitle: Text(
-//                'Team starts with the color',
-//                style: TextStyle(
-//                  fontStyle: FontStyle.italic,
-//                ),
-//              ),
             ),
           );
         },
@@ -80,11 +80,11 @@ class TeamCard extends StatelessWidget {
 }
 
 class SettingsCard extends StatefulWidget {
-  int divisions;
-  String title;
-  double min;
-  double max;
-  double value;
+  final int divisions;
+  final String title;
+  final double min;
+  final double max;
+  final double value;
 
   SettingsCard({this.divisions, this.title, this.min, this.max, this.value});
 
@@ -93,6 +93,14 @@ class SettingsCard extends StatefulWidget {
 }
 
 class _SettingsCardState extends State<SettingsCard> {
+  double _value;
+
+  @override
+  void initState() {
+    super.initState();
+    _value = widget.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -104,15 +112,15 @@ class _SettingsCardState extends State<SettingsCard> {
           Slider(
             min: widget.min,
             max: widget.max,
-            value: widget.value,
+            value: _value,
             onChanged: (newValue) {
               setState(() {
-                widget.value = newValue;
+                _value = newValue;
               });
             },
             divisions: widget.divisions,
           ),
-          Text('${widget.value.toInt()} ${widget.title}'),
+          Text('${_value.toInt()} ${widget.title}'),
           SizedBox(
             height: 3.0,
           ),

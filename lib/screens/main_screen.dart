@@ -58,7 +58,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: Colors.grey[600],
+              color: kPrimaryBackgroundColor,
               borderRadius: BorderRadius.circular(6.0),
             ),
             margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
@@ -78,21 +78,21 @@ class _SettingsDialogState extends State<SettingsDialog> {
                   max: 60.0,
                   value: 30.0,
                   divisions: 50,
-                  title: 'saniye raund süresi',
+                  title: 'saniye',
                 ),
                 SettingsCard(
                   min: 2.0,
                   max: 16.0,
                   value: 4.0,
                   divisions: 14,
-                  title: 'raund sayısı',
+                  title: 'raund',
                 ),
                 SettingsCard(
                   min: 0.0,
                   max: 10.0,
                   value: 3.0,
                   divisions: 10,
-                  title: 'pas hakkı',
+                  title: 'pas',
                 ),
                 MainScreenButton(
                   onPressed: () {},

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/screens/main_screen.dart';
 
 void main() {
@@ -10,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.grey
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: kPrimaryBackgroundColor,
       ),
       title: 'Tabu TR',
       home: SafeArea(

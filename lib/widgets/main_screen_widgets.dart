@@ -19,7 +19,7 @@ class MainScreenButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: onPressed,
-        color: Colors.purple[900],
+        color: kMainButtonColor,
         padding: EdgeInsets.all(20.0),
         child: Text(title),
       ),
@@ -65,11 +65,9 @@ class TeamCard extends StatelessWidget {
                       : '2. Takım',
                   border: InputBorder.none,
                 ),
-                cursorColor: Colors.grey[200],
+                cursorColor: Colors.white,
                 textCapitalization: TextCapitalization.characters,
-                style: TextStyle(
-                  fontSize: 24.0,
-                ),
+                style: kTeamTextStyle,
               ),
             ),
           );
@@ -104,12 +102,14 @@ class _SettingsCardState extends State<SettingsCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: kPrimaryColor,
       margin: EdgeInsets.all(3.0),
-      color: Colors.black54,
       elevation: 0.0,
       child: Column(
         children: <Widget>[
           Slider(
+            activeColor: kSliderActiveColor,
+            inactiveColor: kPrimaryBackgroundColor,
             min: widget.min,
             max: widget.max,
             value: _value,
@@ -120,9 +120,9 @@ class _SettingsCardState extends State<SettingsCard> {
             },
             divisions: widget.divisions,
           ),
-          Text('${_value.toInt()} ${widget.title}'),
+          Text('${_value.toInt()} ${widget.title}', style: kSettingsTextStyle),
           SizedBox(
-            height: 3.0,
+            height: 6.0,
           ),
         ],
       ),

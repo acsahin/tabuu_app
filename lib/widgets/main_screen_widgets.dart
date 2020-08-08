@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
-import 'package:tabuu_app/models/team_data.dart';
+import 'package:tabuu_app/models/game_data.dart';
 import 'package:provider/provider.dart';
+import 'package:tabuu_app/screens/play_screen.dart';
 
 class MainScreenButton extends StatelessWidget {
-  final Function onPressed;
+  final Function onTap;
   final String title;
 
-  MainScreenButton({@required this.onPressed, @required this.title});
+  MainScreenButton({this.onTap, @required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,18 @@ class MainScreenButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        onPressed: onPressed,
+        onPressed: title == 'BAŞLAT'
+            ? () {
+          GameData gD = Provider.of<GameData>(context, listen: false);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PlayScreen(
+                        gameData: gD,
+                      ),
+                    ));
+              }
+            : onTap,
         color: kMainButtonColor,
         padding: EdgeInsets.all(20.0),
         child: Text(title),
@@ -35,27 +47,35 @@ class TeamCard extends StatelessWidget {
     return GestureDetector(
       onHorizontalDragEnd: (detail) {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false).changeTeam1Color()
-            : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
+            ? Provider.of<GameData>(context, listen: false)
+                .teamData
+                .changeTeam1Color()
+            : Provider.of<GameData>(context, listen: false)
+                .teamData
+                .changeTeam2Color();
       },
       onTap: () {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false).changeTeam1Icon()
-            : Provider.of<TeamData>(context, listen: false).changeTeam2Icon();
+            ? Provider.of<GameData>(context, listen: false)
+                .teamData
+                .changeTeam1Icon()
+            : Provider.of<GameData>(context, listen: false)
+                .teamData
+                .changeTeam2Icon();
       },
-      child: Consumer<TeamData>(
-        builder: (context, teamData, child) {
+      child: Consumer<GameData>(
+        builder: (context, gameData, child) {
           return Card(
             margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
             color: selectedTeam == TeamNumber.team1
-                ? teamData.team1Color
-                : teamData.team2Color,
+                ? gameData.teamData.team1Color
+                : gameData.teamData.team2Color,
             elevation: 8.0,
             child: ListTile(
               leading: Icon(
                 selectedTeam == TeamNumber.team1
-                    ? teamData.team1Icon
-                    : teamData.team2Icon,
+                    ? gameData.teamData.team1Icon
+                    : gameData.teamData.team2Icon,
                 size: 50.0,
               ),
               title: TextField(
@@ -116,6 +136,19 @@ class _SettingsCardState extends State<SettingsCard> {
             onChanged: (newValue) {
               setState(() {
                 _value = newValue;
+                if (widget.title == 'saniye') {
+                  Provider.of<GameData>(context, listen: false).time =
+                      _value.toInt();
+                  print(Provider.of<GameData>(context, listen: false).time);
+                } else if (widget.title == 'raund') {
+                  Provider.of<GameData>(context, listen: false).round =
+                      _value.toInt();
+                  print(Provider.of<GameData>(context, listen: false).round);
+                } else if (widget.title == 'pas') {
+                  Provider.of<GameData>(context, listen: false).pass =
+                      _value.toInt();
+                  print(Provider.of<GameData>(context, listen: false).pass);
+                }
               });
             },
             divisions: widget.divisions,

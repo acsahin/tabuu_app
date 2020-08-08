@@ -7,6 +7,12 @@ class TeamData extends ChangeNotifier{
   Color team2Color = Colors.green;
   IconData team1Icon = Icons.ac_unit;
   IconData team2Icon = Icons.cloud;
+  String team1Name = '1. TAKIM';
+  String team2Name = '2. TAKIM';
+  int team1Correct = 0;
+  int team2Correct = 0;
+  int team1Tabu = 0;
+  int team2Tabu = 0;
 
   Color changeColor(Color color) {
     Color newColor = teamColors.first;

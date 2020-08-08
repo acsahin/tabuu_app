@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:tabuu_app/models/team_data.dart';
+import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/constants.dart';
 
 class MainScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class MainScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             MainScreenButton(
-              onPressed: () {
+              onTap: () {
                 showDialog(
                   context: context,
                   builder: (_) => Center(
@@ -29,11 +30,11 @@ class MainScreen extends StatelessWidget {
               title: 'OYNA',
             ),
             MainScreenButton(
-              onPressed: () {},
+              onTap: () {},
               title: 'YARDIM',
             ),
             MainScreenButton(
-              onPressed: () {},
+              onTap: () {},
               title: 'HAKKINDA',
             ),
           ],
@@ -52,7 +53,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => TeamData(),
+      create: (context) => GameData(TeamData()),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -95,7 +96,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
                   title: 'pas',
                 ),
                 MainScreenButton(
-                  onPressed: () {},
+                  onTap: (){},
                   title: 'BAŞLAT',
                 ),
               ],

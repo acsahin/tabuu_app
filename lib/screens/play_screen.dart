@@ -1,24 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
+import 'package:tabuu_app/models/game_data.dart';
 import 'dart:async';
+import 'package:tabuu_app/widgets/play_screen_widgets.dart';
 
 class PlayScreen extends StatefulWidget {
+  final GameData gameData;
+
+  PlayScreen({this.gameData});
+
   @override
   _PlayScreenState createState() => _PlayScreenState();
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  int time = 5;
+  GameData _gameData;
+  int _time;
   @override
   void initState() {
     super.initState();
-    print(time);
+    _gameData = widget.gameData;
+    _time = _gameData.time;
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        time--;
-        print(time);
-        if (time == 0) {
+        _time--;
+        print(_time);
+        if (_time == 0) {
           timer.cancel();
           print('DONE');
         }
@@ -30,7 +38,8 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: time != 0 ? Text('$time SANİYE') : Text('DONE'),
+        title: _time != 0 ? Text('$_time SANİYE', style: TextStyle(fontSize: 40.0),) : Text('! ! B İ T T İ ! !', style: TextStyle(fontSize: 40.0),),
+        centerTitle: true,
       ),
       body: Container(
         child: Column(
@@ -41,13 +50,15 @@ class _PlayScreenState extends State<PlayScreen> {
               color: Colors.blue,
               elevation: 8.0,
               child: ListTile(
+                contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 leading: Icon(
                   Icons.timer,
-                  size: 50.0,
+                  size: 60.0,
                 ),
                 title: Text(
                   '1. TAKIM',
-                  style: kTeamTextStyle,
+                  textAlign: TextAlign.center,
+                  style: kTeamTextStyle.copyWith(fontSize: 35.0),
                 ),
               ),
             ),
@@ -90,37 +101,4 @@ class _PlayScreenState extends State<PlayScreen> {
   }
 }
 
-class ResultButton extends StatelessWidget {
-  final BorderRadius borderRadius;
-  final String text;
-  final IconData icon;
-  final Color color;
 
-  ResultButton({this.borderRadius, this.icon, this.text, this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-      padding: EdgeInsets.symmetric(vertical: 20.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
-      ),
-      color: color,
-      onPressed: () {},
-      child: Column(
-        children: <Widget>[
-          Icon(
-            icon,
-            size: 40.0,
-          ),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

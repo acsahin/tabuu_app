@@ -1,14 +1,22 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tabuu_app/models/team_data.dart';
+import 'package:flutter/services.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/constants.dart';
 
 class MainScreen extends StatelessWidget {
+  void loadFile() async {
+    String data = await rootBundle.loadString('images/dummy.json');
+    List<dynamic> questionList = jsonDecode(data);
+    print(questionList[0]['title']);
+  }
+
   @override
   Widget build(BuildContext context) {
+    loadFile();
     return Scaffold(
       appBar: AppBar(
         title: Text('Tabu TR'),
@@ -52,18 +60,18 @@ class SettingsDialog extends StatefulWidget {
 class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GameData(TeamData()),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: kPrimaryBackgroundColor,
-              borderRadius: BorderRadius.circular(6.0),
-            ),
-            margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
-            padding: EdgeInsets.all(5.0),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            color: kPrimaryBackgroundColor,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+          margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
+          padding: EdgeInsets.all(5.0),
+          child: ChangeNotifierProvider(
+            create: (context) => GameData(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,14 +104,14 @@ class _SettingsDialogState extends State<SettingsDialog> {
                   title: 'pas',
                 ),
                 MainScreenButton(
-                  onTap: (){},
+                  onTap: () {},
                   title: 'BAŞLAT',
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -21,7 +21,7 @@ class MainScreenButton extends StatelessWidget {
         ),
         onPressed: title == 'BAŞLAT'
             ? () {
-          GameData gD = Provider.of<GameData>(context, listen: false);
+                GameData gD = Provider.of<GameData>(context, listen: false);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -48,50 +48,46 @@ class TeamCard extends StatelessWidget {
       onHorizontalDragEnd: (detail) {
         selectedTeam == TeamNumber.team1
             ? Provider.of<GameData>(context, listen: false)
-                .teamData
                 .changeTeam1Color()
             : Provider.of<GameData>(context, listen: false)
-                .teamData
                 .changeTeam2Color();
       },
       onTap: () {
         selectedTeam == TeamNumber.team1
             ? Provider.of<GameData>(context, listen: false)
-                .teamData
                 .changeTeam1Icon()
             : Provider.of<GameData>(context, listen: false)
-                .teamData
                 .changeTeam2Icon();
       },
-      child: Consumer<GameData>(
-        builder: (context, gameData, child) {
-          return Card(
-            margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
-            color: selectedTeam == TeamNumber.team1
-                ? gameData.teamData.team1Color
-                : gameData.teamData.team2Color,
-            elevation: 8.0,
-            child: ListTile(
-              leading: Icon(
-                selectedTeam == TeamNumber.team1
-                    ? gameData.teamData.team1Icon
-                    : gameData.teamData.team2Icon,
-                size: 50.0,
-              ),
-              title: TextField(
-                decoration: InputDecoration(
-                  hintText: selectedTeam == TeamNumber.team1
-                      ? '1. Takım'
-                      : '2. Takım',
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.white,
-                textCapitalization: TextCapitalization.characters,
-                style: kTeamTextStyle,
-              ),
+      child: Card(
+        margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
+        color: selectedTeam == TeamNumber.team1
+            ? Provider.of<GameData>(context).team1Color
+            : Provider.of<GameData>(context).team2Color,
+        elevation: 8.0,
+        child: ListTile(
+          leading: Icon(
+            selectedTeam == TeamNumber.team1
+                ? Provider.of<GameData>(context).team1Icon
+                : Provider.of<GameData>(context).team2Icon,
+            size: 50.0,
+          ),
+          title: TextField(
+            decoration: InputDecoration(
+              hintText:
+                  selectedTeam == TeamNumber.team1 ? '1. Takım' : '2. Takım',
+              border: InputBorder.none,
             ),
-          );
-        },
+            onChanged: (newName) {
+              selectedTeam == TeamNumber.team1
+                  ? Provider.of<GameData>(context, listen: false).team1Name = newName.toString()
+                  : Provider.of<GameData>(context, listen: false).team2Name = newName.toString();
+            },
+            cursorColor: Colors.white,
+            textCapitalization: TextCapitalization.characters,
+            style: kTeamTextStyle,
+          ),
+        ),
       ),
     );
   }

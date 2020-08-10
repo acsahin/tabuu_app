@@ -16,17 +16,24 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   GameData _gameData;
-  int _time;
+  int _currentTime;
+  TeamNumber _currentTeam;
+
   @override
   void initState() {
     super.initState();
     _gameData = widget.gameData;
-    _time = _gameData.time;
+    _currentTime = _gameData.time;
+    _currentTeam = TeamNumber.team1;
+    roundTimer();
+  }
+
+  void roundTimer() {
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        _time--;
-        print(_time);
-        if (_time == 0) {
+        _currentTime--;
+        print(_currentTime);
+        if (_currentTime == 0) {
           timer.cancel();
           print('DONE');
         }
@@ -38,7 +45,7 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _time != 0 ? Text('$_time SANİYE', style: TextStyle(fontSize: 40.0),) : Text('! ! B İ T T İ ! !', style: TextStyle(fontSize: 40.0),),
+        title: _currentTime != 0 ? Text('$_currentTime SANİYE', style: TextStyle(fontSize: 40.0),) : Text('! ! B İ T T İ ! !', style: TextStyle(fontSize: 40.0),),
         centerTitle: true,
       ),
       body: Container(
@@ -47,16 +54,16 @@ class _PlayScreenState extends State<PlayScreen> {
           children: <Widget>[
             Card(
               margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: Colors.blue,
+              color: _currentTeam == TeamNumber.team1 ? _gameData.team1Color : _gameData.team2Color,
               elevation: 8.0,
               child: ListTile(
                 contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 leading: Icon(
-                  Icons.timer,
+                  _currentTeam == TeamNumber.team1 ? _gameData.team1Icon : _gameData.team2Icon,
                   size: 60.0,
                 ),
                 title: Text(
-                  '1. TAKIM',
+                  _currentTeam == TeamNumber.team1 ? _gameData.team1Name : _gameData.team2Name,
                   textAlign: TextAlign.center,
                   style: kTeamTextStyle.copyWith(fontSize: 35.0),
                 ),

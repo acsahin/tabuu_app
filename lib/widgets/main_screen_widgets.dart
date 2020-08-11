@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:provider/provider.dart';
+import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/screens/play_screen.dart';
 
 class MainScreenButton extends StatelessWidget {
@@ -22,11 +23,13 @@ class MainScreenButton extends StatelessWidget {
         onPressed: title == 'BAŞLAT'
             ? () {
                 GameData gD = Provider.of<GameData>(context, listen: false);
+                TeamData tD = Provider.of<TeamData>(context, listen: false);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PlayScreen(
                         gameData: gD,
+                        teamData: tD,
                       ),
                     ));
               }
@@ -47,29 +50,29 @@ class TeamCard extends StatelessWidget {
     return GestureDetector(
       onHorizontalDragEnd: (detail) {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<GameData>(context, listen: false)
+            ? Provider.of<TeamData>(context, listen: false)
                 .changeTeam1Color()
-            : Provider.of<GameData>(context, listen: false)
+            : Provider.of<TeamData>(context, listen: false)
                 .changeTeam2Color();
       },
       onTap: () {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<GameData>(context, listen: false)
-                .changeTeam1Icon()
-            : Provider.of<GameData>(context, listen: false)
-                .changeTeam2Icon();
+            ? Provider.of<TeamData>(context, listen: false)
+            .changeTeam1Icon()
+            : Provider.of<TeamData>(context, listen: false)
+            .changeTeam2Icon();
       },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
         color: selectedTeam == TeamNumber.team1
-            ? Provider.of<GameData>(context).team1Color
-            : Provider.of<GameData>(context).team2Color,
+            ? Provider.of<TeamData>(context).team1Color
+            : Provider.of<TeamData>(context).team2Color,
         elevation: 8.0,
         child: ListTile(
           leading: Icon(
             selectedTeam == TeamNumber.team1
-                ? Provider.of<GameData>(context).team1Icon
-                : Provider.of<GameData>(context).team2Icon,
+                ? Provider.of<TeamData>(context).team1Icon
+                : Provider.of<TeamData>(context).team2Icon,
             size: 50.0,
           ),
           title: TextField(
@@ -80,8 +83,8 @@ class TeamCard extends StatelessWidget {
             ),
             onChanged: (newName) {
               selectedTeam == TeamNumber.team1
-                  ? Provider.of<GameData>(context, listen: false).team1Name = newName.toString()
-                  : Provider.of<GameData>(context, listen: false).team2Name = newName.toString();
+                  ? Provider.of<TeamData>(context, listen: false).team1Name = newName.toString()
+                  : Provider.of<TeamData>(context, listen: false).team2Name = newName.toString();
             },
             cursorColor: Colors.white,
             textCapitalization: TextCapitalization.characters,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:tabuu_app/models/game_data.dart';
@@ -70,8 +71,11 @@ class _SettingsDialogState extends State<SettingsDialog> {
           ),
           margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
           padding: EdgeInsets.all(5.0),
-          child: ChangeNotifierProvider(
-            create: (context) => GameData(),
+          child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context) => TeamData()),
+              ChangeNotifierProvider(create: (context) => GameData()),
+            ],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,

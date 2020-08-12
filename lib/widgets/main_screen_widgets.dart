@@ -24,6 +24,7 @@ class MainScreenButton extends StatelessWidget {
             ? () {
                 GameData gD = Provider.of<GameData>(context, listen: false);
                 TeamData tD = Provider.of<TeamData>(context, listen: false);
+                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

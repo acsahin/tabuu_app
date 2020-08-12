@@ -21,6 +21,7 @@ class _PlayScreenState extends State<PlayScreen> {
   TeamData _teamData;
   int _currentTime;
   TeamNumber _currentTeam;
+  int _roundNumber = 1;
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _PlayScreenState extends State<PlayScreen> {
   }
 
   void roundTimer() {
+    if (!mounted) return;
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _currentTime--;
@@ -40,26 +42,24 @@ class _PlayScreenState extends State<PlayScreen> {
         if (_currentTime == 0) {
           timer.cancel();
           print('DONE');
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      color: kPrimaryBackgroundColor,
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-                    margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
-                    padding: EdgeInsets.all(5.0),
-                    child: Text('heloooo'),
-                  ),
-                ],
-              ),
-            ),
-          );
+          if(_roundNumber == _gameData.round && _currentTeam == TeamNumber.team2) Navigator.pop(context);
+          else {
+            _currentTime = _gameData.time;
+            _currentTeam = (_currentTeam == TeamNumber.team1
+                ? TeamNumber.team2
+                : TeamNumber.team1);
+            showMyDialog(
+              onTap: () {
+                Navigator.pop(context);
+                roundTimer();
+              },
+              context: context,
+              currentTeam: _currentTeam,
+              teamData: _teamData,
+              round: _roundNumber,
+            );
+            if(_currentTeam == TeamNumber.team1) _roundNumber++;
+          }
         }
       });
     });
@@ -69,46 +69,21 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _currentTime != 0
-            ? Text(
-                '$_currentTime SANİYE',
-                style: TextStyle(fontSize: 40.0),
-              )
-            : Text(
-                '! ! B İ T T İ ! !',
-                style: TextStyle(fontSize: 40.0),
-              ),
+        title: Text(
+          _currentTime != 0 ? '$_currentTime SANİYE' : '! ! B İ T T İ ! !',
+          style: TextStyle(fontSize: 40.0),
+        ),
         centerTitle: true,
       ),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              color: _currentTeam == TeamNumber.team1
-                  ? _teamData.team1Color
-                  : _teamData.team2Color,
-              elevation: 8.0,
-              child: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                leading: Icon(
-                  _currentTeam == TeamNumber.team1
-                      ? _teamData.team1Icon
-                      : _teamData.team2Icon,
-                  size: 60.0,
-                ),
-                title: Text(
-                  _currentTeam == TeamNumber.team1
-                      ? _teamData.team1Name
-                      : _teamData.team2Name,
-                  textAlign: TextAlign.center,
-                  style: kTeamTextStyle.copyWith(fontSize: 35.0),
-                ),
-              ),
+            TeamInGameCard(currentTeam: _currentTeam, teamData: _teamData),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Image.asset('images/flag.jpg'),
             ),
-            Image.asset('images/flag.jpg'),
             Row(
               children: <Widget>[
                 Expanded(
@@ -142,6 +117,43 @@ class _PlayScreenState extends State<PlayScreen> {
               ],
             )
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class TeamInGameCard extends StatelessWidget {
+  final TeamNumber currentTeam;
+  final TeamData teamData;
+  final TextStyle textStyle;
+  final EdgeInsets margin;
+
+  TeamInGameCard({this.currentTeam, this.teamData, this.margin, this.textStyle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: margin == null ? EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0) : margin,
+      color: currentTeam == TeamNumber.team1
+          ? teamData.team1Color
+          : teamData.team2Color,
+      elevation: 8.0,
+      child: ListTile(
+        contentPadding:
+            EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+        leading: Icon(
+          currentTeam == TeamNumber.team1
+              ? teamData.team1Icon
+              : teamData.team2Icon,
+          size: 60.0,
+        ),
+        title: Text(
+          currentTeam == TeamNumber.team1
+              ? teamData.team1Name
+              : teamData.team2Name,
+          textAlign: TextAlign.center,
+          style: textStyle == null ? kTeamTextStyle.copyWith(fontSize: 35.0) : textStyle,
         ),
       ),
     );

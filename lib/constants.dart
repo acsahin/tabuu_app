@@ -15,3 +15,7 @@ const kSettingsTextStyle = TextStyle(
 const kTeamTextStyle = TextStyle(
   fontSize: 24.0,
 );
+
+const kTeamLowerTextStyle = TextStyle(
+  fontSize: 20.0,
+);

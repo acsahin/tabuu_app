@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/models/team_data.dart';
+import 'package:tabuu_app/screens/result_screen.dart';
 import 'dart:async';
 import 'package:tabuu_app/widgets/play_screen_widgets.dart';
+import 'package:tabuu_app/models/game_info.dart';
 
 class PlayScreen extends StatefulWidget {
   final GameData gameData;
@@ -21,13 +23,21 @@ class _PlayScreenState extends State<PlayScreen> {
   TeamData _teamData;
   int _currentTime;
   TeamNumber _currentTeam;
-  int _roundNumber = 1;
+  GameInfo _gameInfo;
 
   @override
   void initState() {
     super.initState();
     _gameData = widget.gameData;
     _teamData = widget.teamData;
+    _gameInfo = GameInfo(
+      team1Color: _teamData.team1Color,
+      team1Name: _teamData.team1Name,
+      team1Icon: _teamData.team1Icon,
+      team2Color: _teamData.team2Color,
+      team2Name: _teamData.team2Name,
+      team2Icon: _teamData.team2Icon,
+    );
     _currentTime = _gameData.time;
     _currentTeam = TeamNumber.team1;
     roundTimer();
@@ -42,9 +52,25 @@ class _PlayScreenState extends State<PlayScreen> {
         if (_currentTime == 0) {
           timer.cancel();
           print('DONE');
-          if(_roundNumber == _gameData.round && _currentTeam == TeamNumber.team2) Navigator.pop(context);
+          if(_gameInfo.roundNumber == _gameData.round && _currentTeam == TeamNumber.team2) {
+            print("FINISH");
+            print("t1 tabu: ${_gameInfo.team1Tabu}");
+            print("t2 tabu: ${_gameInfo.team2Tabu}");
+            print("t1 correct: ${_gameInfo.team1Correct}");
+            print("t1 correct: ${_gameInfo.team2Correct}");
+
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultScreen(
+                    gameInfo: _gameInfo,
+                  ),
+                ));
+          }
           else {
             _currentTime = _gameData.time;
+            _gameInfo.restart();
             _currentTeam = (_currentTeam == TeamNumber.team1
                 ? TeamNumber.team2
                 : TeamNumber.team1);
@@ -56,9 +82,9 @@ class _PlayScreenState extends State<PlayScreen> {
               context: context,
               currentTeam: _currentTeam,
               teamData: _teamData,
-              round: _roundNumber,
+              round: _gameInfo.roundNumber,
             );
-            if(_currentTeam == TeamNumber.team1) _roundNumber++;
+            if(_currentTeam == TeamNumber.team1) _gameInfo.roundNumber++;
           }
         }
       });
@@ -93,6 +119,10 @@ class _PlayScreenState extends State<PlayScreen> {
                         BorderRadius.only(topRight: Radius.circular(10.0)),
                     text: 'TABU',
                     icon: Icons.sentiment_very_dissatisfied,
+                    onTap: () {
+                      _gameInfo.tabu(_currentTeam);
+                      //TODO: NEXT Q
+                    },
                   ),
                 ),
                 Expanded(
@@ -103,6 +133,17 @@ class _PlayScreenState extends State<PlayScreen> {
                         topLeft: Radius.circular(10.0)),
                     text: 'PAS',
                     icon: Icons.block,
+                    onTap: () {
+                      if(_currentTeam == TeamNumber.team1 && _gameInfo.team1Pass < _gameData.pass) {
+                        _gameInfo.pass(_currentTeam);
+                        //TODO: NEXT Q
+                      }else if(_currentTeam == TeamNumber.team2 && _gameInfo.team2Pass < _gameData.pass) {
+                        _gameInfo.pass(_currentTeam);
+                        //TODO: NEXT Q
+                      }
+                      print("Team1: ${_gameInfo.team1Pass}");
+                      print("Team2: ${_gameInfo.team2Pass}");
+                    },
                   ),
                 ),
                 Expanded(
@@ -112,6 +153,10 @@ class _PlayScreenState extends State<PlayScreen> {
                         BorderRadius.only(topLeft: Radius.circular(10.0)),
                     text: 'DOĞRU',
                     icon: Icons.sentiment_very_satisfied,
+                    onTap: () {
+                      _gameInfo.correct(_currentTeam);
+                      //TODO: NEXT Q
+                    },
                   ),
                 ),
               ],

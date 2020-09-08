@@ -87,7 +87,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
                   selectedTeam: TeamNumber.team2,
                 ),
                 SettingsCard(
-                  min: 10.0,
+                  min: 3.0,
                   max: 60.0,
                   value: 30.0,
                   divisions: 50,

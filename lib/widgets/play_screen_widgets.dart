@@ -11,8 +11,9 @@ class ResultButton extends StatelessWidget {
   final String text;
   final IconData icon;
   final Color color;
+  final Function onTap;
 
-  ResultButton({this.borderRadius, this.icon, this.text, this.color});
+  ResultButton({this.borderRadius, this.icon, this.text, this.color, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ResultButton extends StatelessWidget {
         borderRadius: borderRadius,
       ),
       color: color,
-      onPressed: () {},
+      onPressed: onTap,
       child: Column(
         children: <Widget>[
           Icon(

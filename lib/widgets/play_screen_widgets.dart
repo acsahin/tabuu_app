@@ -63,26 +63,32 @@ void showMyDialog({
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Material(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                  color: kSliderActiveColor,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                color: kSliderActiveColor,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Color(0xFFfce2ce),
+                        width: 4.0
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                    color: kSliderActiveColor,
+                  ),
+                  child: Text(
+                      currentTeam == TeamNumber.team1
+                          ? '${teamData.team2Name}\n' +
+                          '$round' +
+                          '. raundu bitirdi.\n' +
+                          'Sıradaki takım:'
+                          : '${teamData.team1Name}\n' +
+                              '$round' +
+                              '. raundu bitirdi.\n' +
+                              'Sıradaki takım:',
+                      textAlign: TextAlign.center,
+                      style: kSettingsTextStyle.copyWith(fontSize: 24, backgroundColor: kSliderActiveColor)),
                 ),
-                padding: EdgeInsets.all(10.0),
-                margin: EdgeInsets.all(5.0),
-                child: Text(
-                    currentTeam == TeamNumber.team1
-                        ? '${teamData.team2Name}\n' +
-                        '$round' +
-                        '. raundu bitirdi.\n' +
-                        'Sıradaki takım:'
-                        : '${teamData.team1Name}\n' +
-                            '$round' +
-                            '. raundu bitirdi.\n' +
-                            'Sıradaki takım:',
-                    textAlign: TextAlign.center,
-                    style: kSettingsTextStyle.copyWith(fontSize: 24, backgroundColor: kSliderActiveColor)),
               ),
             ),
             TeamInGameCard(

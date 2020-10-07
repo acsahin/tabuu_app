@@ -7,10 +7,6 @@ class ResultScreen extends StatelessWidget {
 
   ResultScreen({this.gameInfo});
 
-  List<Widget> results() {
-    return gameInfo.theWinner();
-  }
-
   @override
   Widget build(BuildContext context) {
     gameInfo.gameFinished();
@@ -18,12 +14,10 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Tabu TR'),
       ),
-      body: Container(
-        color: kPrimaryBackgroundColor,
-        padding: EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: results(),
+      body: SafeArea(
+        child: Container(
+          color: kPrimaryBackgroundColor,
+          child: gameInfo.theWinner(),
         ),
       ),
     );

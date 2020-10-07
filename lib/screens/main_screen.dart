@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 import 'package:provider/provider.dart';
@@ -9,15 +7,9 @@ import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/constants.dart';
 
 class MainScreen extends StatelessWidget {
-  void loadFile() async {
-    String data = await rootBundle.loadString('images/dummy.json');
-    List<dynamic> questionList = jsonDecode(data);
-    print(questionList[0]['title']);
-  }
 
   @override
   Widget build(BuildContext context) {
-    loadFile();
     return Scaffold(
       appBar: AppBar(
         title: Text('Tabu TR'),

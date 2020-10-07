@@ -1,0 +1,762 @@
+[
+  {
+    "title": "METRES",
+    "tabu1": "KARI KOCA",
+    "tabu2": "EVLİ",
+    "tabu3": "ALDATMAK",
+    "tabu4": "YASAK",
+    "tabu5": "İLİŞKİ"
+  },
+  {
+    "title": "FAKS",
+    "tabu1": "ÇEKMEK",
+    "tabu2": "GÖNDERMEK",
+    "tabu3": "YAZI",
+    "tabu4": "KAĞIT",
+    "tabu5": "FOTOKOPİ"
+  },
+  {
+    "title": "GAZİ",
+    "tabu1": "SAVAŞ",
+    "tabu2": "YARALANMAK",
+    "tabu3": "ŞEHİT",
+    "tabu4": "MADALYA",
+    "tabu5": "ATATÜRK"
+  },
+  {
+    "title": "VEKTÖR",
+    "tabu1": "YÖN",
+    "tabu2": "FİZİK",
+    "tabu3": "SKALER",
+    "tabu4": "ÇİZMEK",
+    "tabu5": "DOĞRU"
+  },
+  {
+    "title": "HASIRALTI ETMEK",
+    "tabu1": "SAKLAMAK",
+    "tabu2": "GİZLEMEK",
+    "tabu3": "KORUMAK",
+    "tabu4": "YOK ETMEK",
+    "tabu5": "ÖRTBAS"
+  },
+  {
+    "title": "VENEDİK",
+    "tabu1": "GONDOL",
+    "tabu2": "ÜLKE",
+    "tabu3": "SU",
+    "tabu4": "İTALYA",
+    "tabu5": "YÜZMEK"
+  },
+  {
+    "title": "SELÜLİT",
+    "tabu1": "BACAK",
+    "tabu2": "KADIN",
+    "tabu3": "CİLT",
+    "tabu4": "YAĞ",
+    "tabu5": "PORTAKAL"
+  },
+  {
+    "title": "NORM",
+    "tabu1": "KURAL",
+    "tabu2": "YERLEŞMİŞ",
+    "tabu3": "İLKE",
+    "tabu4": "YASA",
+    "tabu5": "DÜZEN"
+  },
+  {
+    "title": "ALT",
+    "tabu1": "ÜST",
+    "tabu2": "YER",
+    "tabu3": "TABAN",
+    "tabu4": "DERECE",
+    "tabu5": "SINIF"
+  },
+  {
+    "title": "ABONE",
+    "tabu1": "YAYINCI",
+    "tabu2": "SATIN ALMAK",
+    "tabu3": "ÜYE",
+    "tabu4": "DERGİ",
+    "tabu5": "GAZETE"
+  },
+  {
+    "title": "TEZGAH",
+    "tabu1": "KURMAK",
+    "tabu2": "MASA",
+    "tabu3": "MUTFAK",
+    "tabu4": "SATICI",
+    "tabu5": "BÜFE"
+  },
+  {
+    "title": "TEMAS",
+    "tabu1": "FİZİKSEL",
+    "tabu2": "DEĞME",
+    "tabu3": "DOKUNMA",
+    "tabu4": "MÜNASEBET",
+    "tabu5": "BULUŞMAK"
+  },
+  {
+    "title": "EFSANE",
+    "tabu1": "HAYALİ",
+    "tabu2": "YADADILIŞ",
+    "tabu3": "ÖYKÜ",
+    "tabu4": "ABARTMAK",
+    "tabu5": "SÖYLENCE"
+  },
+  {
+    "title": "İMLA",
+    "tabu1": "KURAL",
+    "tabu2": "YAZIM",
+    "tabu3": "DİL BİLGİSİ",
+    "tabu4": "HATA",
+    "tabu5": "TERİM"
+  },
+  {
+    "title": "SAKAL",
+    "tabu1": "BIYIK",
+    "tabu2": "YÜZ",
+    "tabu3": "TIRAŞ",
+    "tabu4": "KESMEK",
+    "tabu5": "TOP"
+  },
+  {
+    "title": "LOSYON",
+    "tabu1": "TIRAŞ",
+    "tabu2": "KOLONYA",
+    "tabu3": "PARFÜM",
+    "tabu4": "KOKU",
+    "tabu5": "BERBER"
+  },
+  {
+    "title": "BARBAR",
+    "tabu1": "KABA",
+    "tabu2": "İLKEL",
+    "tabu3": "KIRICI",
+    "tabu4": "UYGARLAŞMA",
+    "tabu5": "AKIN"
+  },
+  {
+    "title": "FABL",
+    "tabu1": "MASAL",
+    "tabu2": "HAYVAN",
+    "tabu3": "HİKAYE",
+    "tabu4": "ÖYKÜ",
+    "tabu5": "DERS"
+  },
+  {
+    "title": "ABDESTHANE",
+    "tabu1": "TUVALET",
+    "tabu2": "WC",
+    "tabu3": "HELA",
+    "tabu4": "ALMAK",
+    "tabu5": "NAMAZ"
+  },
+  {
+    "title": "HAKİ",
+    "tabu1": "RENK",
+    "tabu2": "YEŞİL",
+    "tabu3": "KAHVERENGİ",
+    "tabu4": "ÇALMAK",
+    "tabu5": "KAÇMAK"
+  },
+  {
+    "title": "LATİN AMERİKA",
+    "tabu1": "GÜNEY",
+    "tabu2": "KITA",
+    "tabu3": "BREZİLYA",
+    "tabu4": "ÜLKE",
+    "tabu5": "ARJANTİN"
+  },
+  {
+    "title": "DEFİNE",
+    "tabu1": "HARİTA",
+    "tabu2": "PARA",
+    "tabu3": "ALTIN",
+    "tabu4": "ALİ",
+    "tabu5": "KORSAN"
+  },
+  {
+    "title": "TARAMAK",
+    "tabu1": "SAÇ",
+    "tabu2": "ARAŞTIRMAK",
+    "tabu3": "DERLEMEK",
+    "tabu4": "ATEŞLEMEK",
+    "tabu5": "AYIKLAMAK"
+  },
+  {
+    "title": "İPUCU",
+    "tabu1": "İZ",
+    "tabu2": "EMARE",
+    "tabu3": "VERMEK",
+    "tabu4": "DEDEKTİF",
+    "tabu5": "SIR"
+  },
+  {
+    "title": "ALTIN",
+    "tabu1": "TAKMAK",
+    "tabu2": "DEĞERLİ",
+    "tabu3": "KUYUMCU",
+    "tabu4": "ÇEYREK",
+    "tabu5": "SARRAF"
+  },
+  {
+    "title": "AÇISAL HIZ",
+    "tabu1": "FİZİK",
+    "tabu2": "VEKTÖREL",
+    "tabu3": "HAREKET",
+    "tabu4": "DAİRESEL",
+    "tabu5": "TARAMAK"
+  },
+  {
+    "title": "SÜZMEK",
+    "tabu1": "SU",
+    "tabu2": "AYIRMAK",
+    "tabu3": "SIVI",
+    "tabu4": "MAKARNA",
+    "tabu5": "KATI"
+  },
+  {
+    "title": "KABAKULAK",
+    "tabu1": "HASTALIK",
+    "tabu2": "İLTİHAP",
+    "tabu3": "ŞİŞMEK",
+    "tabu4": "BEZ",
+    "tabu5": "TÜKÜRÜK"
+  },
+  {
+    "title": "GÜLER",
+    "tabu1": "SABANCI",
+    "tabu2": "SAKIP",
+    "tabu3": "İŞ",
+    "tabu4": "KADIN",
+    "tabu5": "ZENGİN"
+  },
+  {
+    "title": "KÜF",
+    "tabu1": "EKMEK",
+    "tabu2": "YEŞİL",
+    "tabu3": "MANTAR",
+    "tabu4": "BAKTERİ",
+    "tabu5": "KURT"
+  },
+  {
+    "title": "ANATOMİ",
+    "tabu1": "VÜCUT",
+    "tabu2": "SİSTEM",
+    "tabu3": "İNCELEMEK",
+    "tabu4": "ORGAN",
+    "tabu5": "DİŞ"
+  },
+  {
+    "title": "KARL MARX",
+    "tabu1": "SOSYALİZM",
+    "tabu2": "KOMÜNİZM",
+    "tabu3": "FELSEFE",
+    "tabu4": "MANİFESTO",
+    "tabu5": "KAPİTAL"
+  },
+  {
+    "title": "HALAY ÇEKMEK",
+    "tabu1": "DÜĞÜN",
+    "tabu2": "OYNAMAK",
+    "tabu3": "DAİRE",
+    "tabu4": "MENDİL",
+    "tabu5": "BAŞ"
+  },
+  {
+    "title": "ALTERNATİF AKIM",
+    "tabu1": "DOĞRU",
+    "tabu2": "ELEKTRİK",
+    "tabu3": "DEĞİŞKEN",
+    "tabu4": "NİKOLA TESLA",
+    "tabu5": "SİNÜS"
+  },
+  {
+    "title": "FOTOKOPİ",
+    "tabu1": "KOPYA",
+    "tabu2": "MAKİNE",
+    "tabu3": "FAX",
+    "tabu4": "TARAMAK",
+    "tabu5": "KIRTASİYE"
+  },
+  {
+    "title": "BARKOD",
+    "tabu1": "ÜRÜN",
+    "tabu2": "FİYAT",
+    "tabu3": "İMZA",
+    "tabu4": "ÇİZGİ",
+    "tabu5": "ALT"
+  },
+  {
+    "title": "ODAK",
+    "tabu1": "OPTİK",
+    "tabu2": "IŞIK",
+    "tabu3": "KAYNAK",
+    "tabu4": "TOPLANMAK",
+    "tabu5": "AYNA"
+  },
+  {
+    "title": "MAKAS",
+    "tabu1": "KUMAŞ",
+    "tabu2": "KESMEK",
+    "tabu3": "KAĞIT",
+    "tabu4": "NİŞAN",
+    "tabu5": "TERZİ"
+  },
+  {
+    "title": "ELİ AĞIR",
+    "tabu1": "YAVAŞ",
+    "tabu2": "YAPMAK",
+    "tabu3": "ÇABUK",
+    "tabu4": "DOKTOR",
+    "tabu5": "HEMŞİRE"
+  },
+  {
+    "title": "FABL",
+    "tabu1": "MASAL",
+    "tabu2": "HAYVAN",
+    "tabu3": "HİKAYE",
+    "tabu4": "ÖYKÜ",
+    "tabu5": "DERS"
+  },
+  {
+    "title": "KANTİN",
+    "tabu1": "OKUL",
+    "tabu2": "TOST",
+    "tabu3": "KAFETERYA",
+    "tabu4": "ÖĞRENCİ",
+    "tabu5": "YEMEK"
+  },
+  {
+    "title": "İMA ETMEK",
+    "tabu1": "ANLAM",
+    "tabu2": "İZ",
+    "tabu3": "DURUM",
+    "tabu4": "DAVRANIŞ",
+    "tabu5": "ALAMET"
+  },
+  {
+    "title": "MÜHİMMAT",
+    "tabu1": "DEPO",
+    "tabu2": "SAVAŞ",
+    "tabu3": "CEPHANE",
+    "tabu4": "ORDU",
+    "tabu5": "SİLAH"
+  },
+  {
+    "title": "HIÇKIRIK",
+    "tabu1": "SES",
+    "tabu2": "DİYAFRAM",
+    "tabu3": "TUTMAK",
+    "tabu4": "SU",
+    "tabu5": "NEFES"
+  },
+  {
+    "title": "BUZ DEVRİ",
+    "tabu1": "ESKİ ÇAĞ",
+    "tabu2": "SOĞUK",
+    "tabu3": "ERİMEK",
+    "tabu4": "KAR",
+    "tabu5": "ÇİZGİ FİLM"
+  },
+  {
+    "title": "SALSA",
+    "tabu1": "SOS",
+    "tabu2": "DANS",
+    "tabu3": "LATİN",
+    "tabu4": "İSPANYOL",
+    "tabu5": "PARTİ"
+  },
+  {
+    "title": "BONCUK",
+    "tabu1": "KOLYE",
+    "tabu2": "TAKI",
+    "tabu3": "RENKLİ",
+    "tabu4": "KÜÇÜK",
+    "tabu5": "YUVARLAK"
+  },
+  {
+    "title": "TRAVESTİ",
+    "tabu1": "ERKEK",
+    "tabu2": "KADIN",
+    "tabu3": "TRANSSEKSÜEL",
+    "tabu4": "KILIK",
+    "tabu5": "GİRMEK"
+  },
+  {
+    "title": "TEKİLA",
+    "tabu1": "OLMECA",
+    "tabu2": "TUZ",
+    "tabu3": "LİMON",
+    "tabu4": "MEKSİKA",
+    "tabu5": "SHOT"
+  },
+  {
+    "title": "DAKTİLO",
+    "tabu1": "YAZMAK",
+    "tabu2": "HARF",
+    "tabu3": "KAĞIT",
+    "tabu4": "TUŞ",
+    "tabu5": "STİLO"
+  },
+  {
+    "title": "TELSİZ",
+    "tabu1": "TELEFON",
+    "tabu2": "KONUŞMAK",
+    "tabu3": "POLİS",
+    "tabu4": "İLETİŞİM",
+    "tabu5": "TAKSİ"
+  },
+  {
+    "title": "SANDAL",
+    "tabu1": "MOTOR",
+    "tabu2": "DENİZ",
+    "tabu3": "KÜREK",
+    "tabu4": "SEFA",
+    "tabu5": "BALIKÇI"
+  },
+  {
+    "title": "ABLUKA",
+    "tabu1": "KUŞATMA",
+    "tabu2": "SARMAK",
+    "tabu3": "ÇEVRELEMEK",
+    "tabu4": "ALMAK",
+    "tabu5": "KAPLAMAK"
+  },
+  {
+    "title": "HAÇ",
+    "tabu1": "HRİSTİYAN",
+    "tabu2": "ARTI İŞARETİ",
+    "tabu3": "İSA",
+    "tabu4": "ÇARMIH",
+    "tabu5": "PAPA"
+  },
+  {
+    "title": "ASİT",
+    "tabu1": "MAVİ",
+    "tabu2": "KIRMIZI",
+    "tabu3": "TURNUSOL",
+    "tabu4": "BAZ",
+    "tabu5": "MİDE"
+  },
+  {
+    "title": "KUŞ BAKIŞI",
+    "tabu1": "YÜKSEK",
+    "tabu2": "GENEL",
+    "tabu3": "HAYVAN",
+    "tabu4": "GÖRMEK",
+    "tabu5": "KROKİ"
+  },
+  {
+    "title": "HATIR",
+    "tabu1": "GÖNÜL",
+    "tabu2": "KALP",
+    "tabu3": "HAFIZA",
+    "tabu4": "KAHVE",
+    "tabu5": "KIRMAK"
+  },
+  {
+    "title": "İMRENMEK",
+    "tabu1": "KISKANMAK",
+    "tabu2": "GIPTA ETMEK",
+    "tabu3": "ÖZENMEK",
+    "tabu4": "CANI ÇEKMEK",
+    "tabu5": "İSTEMEK"
+  },
+  {
+    "title": "DUMUR",
+    "tabu1": "KÖRELMEK",
+    "tabu2": "APTALLAŞMAK",
+    "tabu3": "ŞOK OLMAK",
+    "tabu4": "ŞAŞIRMAK",
+    "tabu5": "ŞAŞKINA DÖNMEK"
+  },
+  {
+    "title": "KAHIR",
+    "tabu1": "MAHVETME",
+    "tabu2": "PERİŞAN",
+    "tabu3": "EZME",
+    "tabu4": "ÇEKMEK",
+    "tabu5": "ETMEK"
+  },
+  {
+    "title": "KÖŞK",
+    "tabu1": "BAHÇE",
+    "tabu2": "EV",
+    "tabu3": "SÜSLÜ",
+    "tabu4": "KASİR",
+    "tabu5": "YAPI"
+  },
+  {
+    "title": "ALYANS",
+    "tabu1": "EVLİLİK",
+    "tabu2": "YÜZÜK",
+    "tabu3": "KARI KOCA",
+    "tabu4": "PARMAK",
+    "tabu5": "TAKMAK"
+  },
+  {
+    "title": "İKTİDAR",
+    "tabu1": "OTORİTE",
+    "tabu2": "MUHALEFET",
+    "tabu3": "YETKİ",
+    "tabu4": "PARTİ",
+    "tabu5": "KUVVET"
+  },
+  {
+    "title": "ÇIBAN",
+    "tabu1": "İRİN",
+    "tabu2": "DERİ",
+    "tabu3": "BİRİKMEK",
+    "tabu4": "VÜCUT",
+    "tabu5": "ÇIKMAK"
+  },
+  {
+    "title": "ARAP",
+    "tabu1": "SİYAH",
+    "tabu2": "AFRİKA",
+    "tabu3": "FELLAH",
+    "tabu4": "SABUN",
+    "tabu5": "BACI"
+  },
+  {
+    "title": "KALSİYUM",
+    "tabu1": "KEMİK",
+    "tabu2": "SÜT",
+    "tabu3": "PEYNİR",
+    "tabu4": "YOĞURT",
+    "tabu5": "DİŞ"
+  },
+  {
+    "title": "ÇAYIR",
+    "tabu1": "OTLAMAK",
+    "tabu2": "İNEK",
+    "tabu3": "YEŞİL",
+    "tabu4": "ÇİMEN",
+    "tabu5": "PİKNİK"
+  },
+  {
+    "title": "KLİMA",
+    "tabu1": "SICAK",
+    "tabu2": "DUVAR",
+    "tabu3": "YAZ",
+    "tabu4": "SOBA",
+    "tabu5": "KALORİFER"
+  },
+  {
+    "title": "BALİNA",
+    "tabu1": "DENİZ",
+    "tabu2": "OKYANUS",
+    "tabu3": "YUNUS",
+    "tabu4": "MEMELİ",
+    "tabu5": "BALIK"
+  },
+  {
+    "title": "OLUMSUZ",
+    "tabu1": "NEGATİF",
+    "tabu2": "ZARARLI",
+    "tabu3": "ELEŞTİRİ",
+    "tabu4": "YARARLI",
+    "tabu5": "YAPICI"
+  },
+  {
+    "title": "MİSYONER",
+    "tabu1": "DİN",
+    "tabu2": "YAYMAK",
+    "tabu3": "HRİSTİYAN",
+    "tabu4": "ADAMAK",
+    "tabu5": "DÜŞÜNCE"
+  },
+  {
+    "title": "SİNCAP",
+    "tabu1": "HAYVAN",
+    "tabu2": "KEMİRMEK",
+    "tabu3": "AĞAÇ",
+    "tabu4": "FINDIK",
+    "tabu5": "ALVİN"
+  },
+  {
+    "title": "RAMAZAN BAYRAMI",
+    "tabu1": "ŞEKER",
+    "tabu2": "KUTLAMAK",
+    "tabu3": "KURBAN BAYRAMI",
+    "tabu4": "TATİL",
+    "tabu5": "DİNİ"
+  },
+  {
+    "title": "ANNE",
+    "tabu1": "ÇOCUK",
+    "tabu2": "BABA",
+    "tabu3": "SEVMEK",
+    "tabu4": "KORUMAK",
+    "tabu5": "KUTSAL"
+  },
+  {
+    "title": "FARENJİT",
+    "tabu1": "HASTALIK",
+    "tabu2": "BOĞAZ",
+    "tabu3": "İLTİHAP",
+    "tabu4": "TOZ",
+    "tabu5": "SPREY"
+  },
+  {
+    "title": "ARSA",
+    "tabu1": "YER",
+    "tabu2": "TARLA",
+    "tabu3": "ALAN",
+    "tabu4": "YAPI",
+    "tabu5": "YAPMAK"
+  },
+  {
+    "title": "SAÇ",
+    "tabu1": "FÖN",
+    "tabu2": "KUAFÖR & BERBER",
+    "tabu3": "KESTİRMEK",
+    "tabu4": "BOYATMAK",
+    "tabu5": "KADIN & ERKEK"
+  },
+  {
+    "title": "HARE",
+    "tabu1": "PARLAK",
+    "tabu2": "ÇİZGİ",
+    "tabu3": "DALGA",
+    "tabu4": "SERT",
+    "tabu5": "KUMAŞ"
+  },
+  {
+    "title": "BİLİNÇ",
+    "tabu1": "ŞUUR",
+    "tabu2": "TANIMA",
+    "tabu3": "BİLGİ",
+    "tabu4": "GÖRÜŞ",
+    "tabu5": "TEMEL"
+  },
+  {
+    "title": "KALABALIK",
+    "tabu1": "İNSAN",
+    "tabu2": "ÇOK",
+    "tabu3": "TOPLULUK",
+    "tabu4": "KARGAŞA",
+    "tabu5": "AŞIRI"
+  },
+  {
+    "title": "SOĞUK ALGINLIĞI",
+    "tabu1": "ÜŞÜTMEK",
+    "tabu2": "HASTALIK",
+    "tabu3": "ATEŞ",
+    "tabu4": "NEZLE",
+    "tabu5": "AKINTI"
+  },
+  {
+    "title": "MUTASYON",
+    "tabu1": "DEĞİŞİM",
+    "tabu2": "EVRİM",
+    "tabu3": "FARKLI",
+    "tabu4": "GEÇİRMEK",
+    "tabu5": "GEN"
+  },
+  {
+    "title": "SÜTLİMAN",
+    "tabu1": "SAKİN",
+    "tabu2": "SESSİZ",
+    "tabu3": "HUZURLU",
+    "tabu4": "DURGUN",
+    "tabu5": "OLAY"
+  },
+  {
+    "title": "ŞATAFAT",
+    "tabu1": "GÖRKEM",
+    "tabu2": "GÖSTERİŞLİ",
+    "tabu3": "İHTİŞAM",
+    "tabu4": "ÇARPICI",
+    "tabu5": "ZENGİN"
+  },
+  {
+    "title": "NELSON MANDELA",
+    "tabu1": "SİYAHİ",
+    "tabu2": "AFRİKA",
+    "tabu3": "TUTUKLU",
+    "tabu4": "BAŞKAN",
+    "tabu5": "LİDER"
+  },
+  {
+    "title": "UZAK DURMAK",
+    "tabu1": "YAKLAŞMAMAK",
+    "tabu2": "İSTEMEMEK",
+    "tabu3": "MESAFE",
+    "tabu4": "KOYMAK",
+    "tabu5": "YAKIN "
+  },
+  {
+    "title": "EJDERHA",
+    "tabu1": "GAME OF THRONES",
+    "tabu2": "YILAN",
+    "tabu3": "BÜYÜK",
+    "tabu4": "ATEŞ",
+    "tabu5": "FİLM"
+  },
+  {
+    "title": "DENEY",
+    "tabu1": "KİMYA",
+    "tabu2": "LABARATUAR",
+    "tabu3": "FARE",
+    "tabu4": "BİLİM",
+    "tabu5": "TÜP"
+  },
+  {
+    "title": "PÜSKÜL",
+    "tabu1": "SAÇAK",
+    "tabu2": "İP",
+    "tabu3": "SÜS",
+    "tabu4": "FES",
+    "tabu5": "MISIR"
+  },
+  {
+    "title": "EMBESİL",
+    "tabu1": "ZEKA GERİLİĞİ",
+    "tabu2": "APTAL",
+    "tabu3": "MORON",
+    "tabu4": "SALAK",
+    "tabu5": "AHMAK"
+  },
+  {
+    "title": "BEDDUA",
+    "tabu1": "KÖTÜLÜK",
+    "tabu2": "TUTMAK",
+    "tabu3": "ALMAK",
+    "tabu4": "BELA",
+    "tabu5": "ETMEK"
+  },
+  {
+    "title": "DÖNME DOLAP",
+    "tabu1": "LUNAPARK",
+    "tabu2": "YÜKSEK",
+    "tabu3": "ÇOCUK",
+    "tabu4": "EĞLENCE",
+    "tabu5": "JETON"
+  },
+  {
+    "title": "VEKTÖR",
+    "tabu1": "YÖN",
+    "tabu2": "FİZİK",
+    "tabu3": "SKALER",
+    "tabu4": "ÇİZMEK",
+    "tabu5": "DOĞRU"
+  },
+  {
+    "title": "YARDIM",
+    "tabu1": "BAĞIŞ",
+    "tabu2": "DESTEK",
+    "tabu3": "DİLENCİ",
+    "tabu4": "YAPMAK",
+    "tabu5": "KIZILAY"
+  },
+  {
+    "title": "KUŞAK",
+    "tabu1": "BEL",
+    "tabu2": "SARMAK",
+    "tabu3": "BAĞ",
+    "tabu4": "KÜRE",
+    "tabu5": "SİYAH"
+  }
+]

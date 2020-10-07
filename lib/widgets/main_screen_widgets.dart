@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +22,21 @@ class MainScreenButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         onPressed: title == 'BAŞLAT'
-            ? () {
+            ? () async {
                 GameData gD = Provider.of<GameData>(context, listen: false);
                 TeamData tD = Provider.of<TeamData>(context, listen: false);
+                // showDialog(
+                //     context: context,
+                //     builder: (context) => SafeArea(child: SpinKitFadingCircle(
+                //           itemBuilder: (BuildContext context, int index) {
+                //             return DecoratedBox(
+                //               decoration: BoxDecoration(
+                //                 color: index.isEven ? Colors.red : Colors.green,
+                //               ),
+                //             );
+                //           },
+                //         )));
+                String data = await rootBundle.loadString('images/questions.json');
                 Navigator.pop(context);
                 Navigator.push(
                     context,
@@ -31,6 +44,8 @@ class MainScreenButton extends StatelessWidget {
                       builder: (context) => PlayScreen(
                         gameData: gD,
                         teamData: tD,
+                        questionData: data,
+
                       ),
                     ));
               }
@@ -51,17 +66,13 @@ class TeamCard extends StatelessWidget {
     return GestureDetector(
       onHorizontalDragEnd: (detail) {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false)
-                .changeTeam1Color()
-            : Provider.of<TeamData>(context, listen: false)
-                .changeTeam2Color();
+            ? Provider.of<TeamData>(context, listen: false).changeTeam1Color()
+            : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
       },
       onTap: () {
         selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false)
-            .changeTeam1Icon()
-            : Provider.of<TeamData>(context, listen: false)
-            .changeTeam2Icon();
+            ? Provider.of<TeamData>(context, listen: false).changeTeam1Icon()
+            : Provider.of<TeamData>(context, listen: false).changeTeam2Icon();
       },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
@@ -84,8 +95,10 @@ class TeamCard extends StatelessWidget {
             ),
             onChanged: (newName) {
               selectedTeam == TeamNumber.team1
-                  ? Provider.of<TeamData>(context, listen: false).team1Name = newName.toString()
-                  : Provider.of<TeamData>(context, listen: false).team2Name = newName.toString();
+                  ? Provider.of<TeamData>(context, listen: false).team1Name =
+                      newName.toString()
+                  : Provider.of<TeamData>(context, listen: false).team2Name =
+                      newName.toString();
             },
             cursorColor: Colors.white,
             textCapitalization: TextCapitalization.characters,

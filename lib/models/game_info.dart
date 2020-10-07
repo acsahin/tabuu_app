@@ -60,66 +60,154 @@ class GameInfo {
     return correct - (tabu * 2);
   }
 
-  List<Widget> theWinner() {
+  Widget theWinner() {
     if (winner == null) {
-      return <Widget>[
-        Text(
-          "BERABERE",
-          style: TextStyle(fontSize: 30, color: Colors.white),
-        )
-      ];
+      return Container(
+        color: kPrimaryBackgroundColor,
+        child: Text("BERABERE"),
+      );
     } else {
-      return <Widget>[
-        Text(
-          "KAZANAN",
-          style: TextStyle(
-            fontSize: 24.0,
-            color: Colors.white,
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              color: Color(0xFF87556f),
+              child: Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.grade,
+                            color: Colors.yellow[700],
+                            size: 90.0,
+                          ),
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                              color: winner == TeamNumber.team1
+                                  ? team1Color
+                                  : team2Color,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    winner == TeamNumber.team1
+                                        ? team1Icon
+                                        : team2Icon,
+                                    color: Colors.white,
+                                    size: 40.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    winner == TeamNumber.team1
+                                        ? team1Name
+                                        : team2Name,
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 80.0),
+                      child: Text(winner == TeamNumber.team1 ? '$team1Point PUAN' : '$team2Point PUAN',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-        Card(
-          margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
-          color: winner == TeamNumber.team1 ? team1Color : team2Color,
-          elevation: 8.0,
-          child: ListTile(
-            leading: Icon(
-              winner == TeamNumber.team1 ? team1Icon : team2Icon,
-              size: 60.0,
-            ),
-            title: Text(
-              winner == TeamNumber.team1 ? team1Name : team2Name,
-              style: TextStyle(fontSize: 35.0),
+          Expanded(
+            child: Container(
+              color: Color(0xFF4B5D67),
+              child: Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.close,
+                            color: Colors.red,
+                            size: 90.0,
+                          ),
+                        ),
+                        Container(
+                            decoration: BoxDecoration(
+                              color: winner == TeamNumber.team1
+                                  ? team2Color
+                                  : team1Color,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    winner == TeamNumber.team1
+                                        ? team2Icon
+                                        : team1Icon,
+                                    color: Colors.white,
+                                    size: 40.0,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    winner == TeamNumber.team1
+                                        ? team2Name
+                                        : team1Name,
+                                    style: TextStyle(
+                                      fontSize: 30.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 80.0),
+                      child: Text(winner == TeamNumber.team1 ? '$team2Point PUAN' : '$team1Point PUAN',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-        Text(
-          "${winner == TeamNumber.team1 ? team1Point : team2Point} PUAN",
-          style: kTeamTextStyle,
-        ),
-        SizedBox(
-          height: 250.0,
-        ),
-        Text("Kaybeden Takım"),
-        Card(
-          margin: EdgeInsets.symmetric(horizontal: 50.0, vertical: 10.0),
-          color: winner == TeamNumber.team1 ? team2Color : team1Color,
-          elevation: 6.0,
-          child: ListTile(
-            leading: Icon(
-              winner == TeamNumber.team1 ? team2Icon : team1Icon,
-              size: 35.0,
-            ),
-            title: Text(
-              winner == TeamNumber.team1 ? team2Name : team1Name,
-              style: kTeamLowerTextStyle,
-            ),
-          ),
-        ),
-        Text(
-          "${winner == TeamNumber.team1 ? team2Point : team1Point} PUAN",
-          style: kTeamLowerTextStyle,
-        ),
-      ];
+        ],
+      );
     }
   }
 }

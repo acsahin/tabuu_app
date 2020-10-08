@@ -37,14 +37,14 @@ class _PlayScreenState extends State<PlayScreen> {
     _gameData = widget.gameData;
     _teamData = widget.teamData;
     _gameInfo = GameInfo(
-      team1Color: _teamData.team1Color,
-      team1Name: _teamData.team1Name,
-      team1Icon: _teamData.team1Icon,
-      team2Color: _teamData.team2Color,
-      team2Name: _teamData.team2Name,
-      team2Icon: _teamData.team2Icon,
+      team1Color: _teamData.team1.teamColor,
+      team1Name: _teamData.team1.teamName,
+      team1Icon: _teamData.team1.teamIcon,
+      team2Color: _teamData.team2.teamColor,
+      team2Name: _teamData.team2.teamName,
+      team2Icon: _teamData.team2.teamIcon,
     );
-    _currentTime = _gameData.time;
+    _currentTime = _gameData.time.toInt();
     _currentTeam = TeamNumber.team1;
     roundTimer();
   }
@@ -54,17 +54,16 @@ class _PlayScreenState extends State<PlayScreen> {
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _currentTime--;
-        print(_currentTime);
+        //print(_currentTime);
         if (_currentTime == 0) {
           timer.cancel();
-          print('DONE');
           if (_gameInfo.roundNumber == _gameData.round &&
               _currentTeam == TeamNumber.team2) {
-            print("FINISH");
-            print("t1 tabu: ${_gameInfo.team1Tabu}");
-            print("t2 tabu: ${_gameInfo.team2Tabu}");
-            print("t1 correct: ${_gameInfo.team1Correct}");
-            print("t1 correct: ${_gameInfo.team2Correct}");
+            // print("FINISH");
+            // print("t1 tabu: ${_gameInfo.team1Tabu}");
+            // print("t2 tabu: ${_gameInfo.team2Tabu}");
+            // print("t1 correct: ${_gameInfo.team1Correct}");
+            // print("t1 correct: ${_gameInfo.team2Correct}");
 
             Navigator.pop(context);
             Navigator.push(
@@ -75,11 +74,12 @@ class _PlayScreenState extends State<PlayScreen> {
                   ),
                 ));
           } else {
-            _currentTime = _gameData.time;
+            _currentTime = _gameData.time.toInt();
             _gameInfo.restart();
             _currentTeam = (_currentTeam == TeamNumber.team1
                 ? TeamNumber.team2
                 : TeamNumber.team1);
+            _questionBank.getQuestion();
             showMyDialog(
               onTap: () {
                 Navigator.pop(context);
@@ -170,8 +170,8 @@ class _PlayScreenState extends State<PlayScreen> {
                           _questionBank.getQuestion();
                         });
                       }
-                      print("Team1: ${_gameInfo.team1Pass}");
-                      print("Team2: ${_gameInfo.team2Pass}");
+                      // print("Team1: ${_gameInfo.team1Pass}");
+                      // print("Team2: ${_gameInfo.team2Pass}");
                     },
                   ),
                 ),
@@ -215,21 +215,21 @@ class TeamInGameCard extends StatelessWidget {
           ? EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0)
           : margin,
       color: currentTeam == TeamNumber.team1
-          ? teamData.team1Color
-          : teamData.team2Color,
+          ? teamData.team1.teamColor
+          : teamData.team2.teamColor,
       elevation: 8.0,
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
         leading: Icon(
           currentTeam == TeamNumber.team1
-              ? teamData.team1Icon
-              : teamData.team2Icon,
+              ? teamData.team1.teamIcon
+              : teamData.team2.teamIcon,
           size: 60.0,
         ),
         title: Text(
           currentTeam == TeamNumber.team1
-              ? teamData.team1Name
-              : teamData.team2Name,
+              ? teamData.team1.teamName
+              : teamData.team2.teamName,
           textAlign: TextAlign.center,
           style: textStyle == null
               ? kTeamTextStyle.copyWith(fontSize: 35.0)

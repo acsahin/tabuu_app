@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class GameData extends ChangeNotifier{
-  int round = 4;
-  int time = 30;
-  int pass = 3;
+  double round = 4;
+  double time = 60;
+  double pass = 3;
+
+  void changeRound(double newValue) {
+    round = newValue;
+  }
+  void changeTime(double newValue) {
+    time = newValue;
+  }
+  void changePass(double newValue) {
+    pass = newValue;
+  }
 }

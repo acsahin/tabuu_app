@@ -78,11 +78,11 @@ void showMyDialog({
                   ),
                   child: Text(
                       currentTeam == TeamNumber.team1
-                          ? '${teamData.team2Name}\n' +
+                          ? '${teamData.team2.teamName}\n' +
                           '$round' +
                           '. raundu bitirdi.\n' +
                           'Sıradaki takım:'
-                          : '${teamData.team1Name}\n' +
+                          : '${teamData.team1.teamName}\n' +
                               '$round' +
                               '. raundu bitirdi.\n' +
                               'Sıradaki takım:',

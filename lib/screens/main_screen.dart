@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
-import 'package:provider/provider.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/constants.dart';
 
@@ -53,6 +52,8 @@ class SettingsDialog extends StatefulWidget {
 class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
+    TeamData teamData = TeamData();
+    GameData gameData = GameData();
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -63,48 +64,35 @@ class _SettingsDialogState extends State<SettingsDialog> {
           ),
           margin: EdgeInsets.symmetric(vertical: 56.0, horizontal: 30.0),
           padding: EdgeInsets.all(5.0),
-          child: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (context) => TeamData()),
-              ChangeNotifierProvider(create: (context) => GameData()),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TeamCard(
+                selectedTeam: TeamNumber.team1, teamModel: teamData.team1,
+              ),
+              TeamCard(
+                selectedTeam: TeamNumber.team2, teamModel: teamData.team2,
+              ),
+              SettingsCard(
+                title: 'saniye',
+                gameData: gameData,
+              ),
+              SettingsCard(
+                title: 'raund',
+                gameData: gameData,
+              ),
+              SettingsCard(
+                title: 'pas',
+                gameData: gameData,
+              ),
+              MainScreenButton(
+                onTap: () {},
+                title: 'BAŞLAT',
+                gameData: gameData,
+                teamData: teamData,
+              ),
             ],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                TeamCard(
-                  selectedTeam: TeamNumber.team1,
-                ),
-                TeamCard(
-                  selectedTeam: TeamNumber.team2,
-                ),
-                SettingsCard(
-                  min: 3.0,
-                  max: 60.0,
-                  value: 30.0,
-                  divisions: 50,
-                  title: 'saniye',
-                ),
-                SettingsCard(
-                  min: 2.0,
-                  max: 16.0,
-                  value: 4.0,
-                  divisions: 14,
-                  title: 'raund',
-                ),
-                SettingsCard(
-                  min: 0.0,
-                  max: 10.0,
-                  value: 3.0,
-                  divisions: 10,
-                  title: 'pas',
-                ),
-                MainScreenButton(
-                  onTap: () {},
-                  title: 'BAŞLAT',
-                ),
-              ],
-            ),
           ),
         ),
       ],

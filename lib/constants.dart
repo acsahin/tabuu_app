@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+List<Color> teamColors = [Colors.orange[300], Colors.grey, Colors.yellow[900], Colors.indigo];
+List<IconData> teamIcons = [Icons.offline_bolt, Icons.whatshot, Icons.toys, Icons.airplanemode_active, Icons.audiotrack];
+
 enum TeamNumber {
 team1,
 team2,

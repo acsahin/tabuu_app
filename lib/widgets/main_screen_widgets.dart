@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
-import 'package:provider/provider.dart';
 import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/screens/play_screen.dart';
 
 class MainScreenButton extends StatelessWidget {
   final Function onTap;
   final String title;
+  final GameData gameData;
+  final TeamData teamData;
 
-  MainScreenButton({this.onTap, @required this.title});
+  MainScreenButton({this.onTap, @required this.title, this.teamData, this.gameData});
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +24,14 @@ class MainScreenButton extends StatelessWidget {
         ),
         onPressed: title == 'BAŞLAT'
             ? () async {
-                GameData gD = Provider.of<GameData>(context, listen: false);
-                TeamData tD = Provider.of<TeamData>(context, listen: false);
-                // showDialog(
-                //     context: context,
-                //     builder: (context) => SafeArea(child: SpinKitFadingCircle(
-                //           itemBuilder: (BuildContext context, int index) {
-                //             return DecoratedBox(
-                //               decoration: BoxDecoration(
-                //                 color: index.isEven ? Colors.red : Colors.green,
-                //               ),
-                //             );
-                //           },
-                //         )));
                 String data = await rootBundle.loadString('images/questions.json');
                 Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => PlayScreen(
-                        gameData: gD,
-                        teamData: tD,
+                        gameData: gameData,
+                        teamData: teamData,
                         questionData: data,
 
                       ),
@@ -58,47 +46,45 @@ class MainScreenButton extends StatelessWidget {
   }
 }
 
-class TeamCard extends StatelessWidget {
+class TeamCard extends StatefulWidget {
   final TeamNumber selectedTeam;
-  TeamCard({this.selectedTeam});
+  final TeamModel teamModel;
+  TeamCard({this.selectedTeam, this.teamModel});
 
+  @override
+  _TeamCardState createState() => _TeamCardState();
+}
+
+class _TeamCardState extends State<TeamCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragEnd: (detail) {
-        selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false).changeTeam1Color()
-            : Provider.of<TeamData>(context, listen: false).changeTeam2Color();
+        setState(() {
+          widget.teamModel.changeColor();
+        });
       },
       onTap: () {
-        selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context, listen: false).changeTeam1Icon()
-            : Provider.of<TeamData>(context, listen: false).changeTeam2Icon();
+        setState(() {
+          widget.teamModel.changeIcon();
+        });
       },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 3.0, vertical: 5.0),
-        color: selectedTeam == TeamNumber.team1
-            ? Provider.of<TeamData>(context).team1Color
-            : Provider.of<TeamData>(context).team2Color,
+        color: widget.teamModel.teamColor,
         elevation: 8.0,
         child: ListTile(
           leading: Icon(
-            selectedTeam == TeamNumber.team1
-                ? Provider.of<TeamData>(context).team1Icon
-                : Provider.of<TeamData>(context).team2Icon,
+            widget.teamModel.teamIcon,
             size: 50.0,
           ),
           title: TextField(
             decoration: InputDecoration(
               hintText:
-                  selectedTeam == TeamNumber.team1 ? '1. Takım' : '2. Takım',
+                  widget.selectedTeam == TeamNumber.team1 ? '1. Takım' : '2. Takım',
               border: InputBorder.none,
             ),
             onChanged: (newName) {
-              selectedTeam == TeamNumber.team1
-                  ? Provider.of<TeamData>(context, listen: false).team1Name =
-                      newName.toString()
-                  : Provider.of<TeamData>(context, listen: false).team2Name =
-                      newName.toString();
+              widget.teamModel.teamName = newName.toString();
             },
             cursorColor: Colors.white,
             textCapitalization: TextCapitalization.characters,
@@ -110,26 +96,46 @@ class TeamCard extends StatelessWidget {
   }
 }
 
-class SettingsCard extends StatefulWidget {
-  final int divisions;
-  final String title;
-  final double min;
-  final double max;
-  final double value;
 
-  SettingsCard({this.divisions, this.title, this.min, this.max, this.value});
+class SettingsCard extends StatefulWidget {
+  final String title;
+  final GameData gameData;
+
+  SettingsCard({this.title, this.gameData});
 
   @override
   _SettingsCardState createState() => _SettingsCardState();
 }
 
 class _SettingsCardState extends State<SettingsCard> {
+  double _min;
+  double _max;
   double _value;
+  int _divisions;
 
   @override
   void initState() {
     super.initState();
-    _value = widget.value;
+    configure();
+  }
+
+  void configure() {
+    if(widget.title == 'saniye') {
+      _min = 30.0;
+      _max = 180.0;
+      _divisions = 160;
+      _value = widget.gameData.time;
+    }else if(widget.title == 'raund') {
+      _min = 2.0;
+      _max = 10.0;
+      _divisions = 8;
+      _value = widget.gameData.round;
+    }else if(widget.title == 'pas') {
+      _min = 0.0;
+      _max = 10.0;
+      _divisions = 10;
+      _value = widget.gameData.pass;
+    }
   }
 
   @override
@@ -143,28 +149,22 @@ class _SettingsCardState extends State<SettingsCard> {
           Slider(
             activeColor: kSliderActiveColor,
             inactiveColor: kPrimaryBackgroundColor,
-            min: widget.min,
-            max: widget.max,
+            min: _min,
+            max: _max,
             value: _value,
             onChanged: (newValue) {
+              if(widget.title == 'saniye') {
+                widget.gameData.changeTime(newValue);
+              }else if(widget.title == 'raund') {
+                widget.gameData.changeRound(newValue);
+              }else if(widget.title == 'pas') {
+                widget.gameData.changePass(newValue);
+              }
               setState(() {
                 _value = newValue;
-                if (widget.title == 'saniye') {
-                  Provider.of<GameData>(context, listen: false).time =
-                      _value.toInt();
-                  print(Provider.of<GameData>(context, listen: false).time);
-                } else if (widget.title == 'raund') {
-                  Provider.of<GameData>(context, listen: false).round =
-                      _value.toInt();
-                  print(Provider.of<GameData>(context, listen: false).round);
-                } else if (widget.title == 'pas') {
-                  Provider.of<GameData>(context, listen: false).pass =
-                      _value.toInt();
-                  print(Provider.of<GameData>(context, listen: false).pass);
-                }
               });
             },
-            divisions: widget.divisions,
+            divisions: _divisions,
           ),
           Text('${_value.toInt()} ${widget.title}', style: kSettingsTextStyle),
           SizedBox(

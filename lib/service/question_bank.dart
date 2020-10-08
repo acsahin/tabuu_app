@@ -66,6 +66,6 @@ class QuestionBank {
       ),
     ];
     questionList.removeAt(a);
-    print(currentQuestion);
+    // print(currentQuestion);
   }
 }

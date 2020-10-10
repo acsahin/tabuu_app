@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
+import 'package:tabuu_app/models/game_info.dart';
 import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/screens/play_screen.dart';
 
@@ -31,9 +32,8 @@ class MainScreenButton extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => PlayScreen(
                         gameData: gameData,
-                        teamData: teamData,
                         questionData: data,
-
+                        gameInfo: GameInfo(team1: teamData.team1, team2: teamData.team2),
                       ),
                     ));
               }
@@ -121,7 +121,7 @@ class _SettingsCardState extends State<SettingsCard> {
 
   void configure() {
     if(widget.title == 'saniye') {
-      _min = 30.0;
+      _min = 5.0;
       _max = 180.0;
       _divisions = 160;
       _value = widget.gameData.time;

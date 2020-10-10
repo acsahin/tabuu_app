@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
-import 'package:tabuu_app/models/team_data.dart';
 import 'package:tabuu_app/screens/result_screen.dart';
 import 'package:tabuu_app/service/question_bank.dart';
 import 'dart:async';
@@ -12,39 +11,27 @@ import 'package:tabuu_app/models/game_info.dart';
 
 class PlayScreen extends StatefulWidget {
   final GameData gameData;
-  final TeamData teamData;
   final String questionData;
+  final GameInfo gameInfo;
 
-  PlayScreen({this.gameData, this.teamData, this.questionData});
+  PlayScreen({this.gameData, this.questionData, this.gameInfo});
 
   @override
   _PlayScreenState createState() => _PlayScreenState();
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  GameData _gameData;
-  TeamData _teamData;
   QuestionBank _questionBank;
   int _currentTime;
   TeamNumber _currentTeam;
-  GameInfo _gameInfo;
 
   @override
   void initState() {
     super.initState();
     _questionBank = QuestionBank(questionList: jsonDecode(widget.questionData));
+    _questionBank.remake();
     _questionBank.getQuestion();
-    _gameData = widget.gameData;
-    _teamData = widget.teamData;
-    _gameInfo = GameInfo(
-      team1Color: _teamData.team1.teamColor,
-      team1Name: _teamData.team1.teamName,
-      team1Icon: _teamData.team1.teamIcon,
-      team2Color: _teamData.team2.teamColor,
-      team2Name: _teamData.team2.teamName,
-      team2Icon: _teamData.team2.teamIcon,
-    );
-    _currentTime = _gameData.time.toInt();
+    _currentTime = widget.gameData.time.toInt();
     _currentTeam = TeamNumber.team1;
     roundTimer();
   }
@@ -57,25 +44,19 @@ class _PlayScreenState extends State<PlayScreen> {
         //print(_currentTime);
         if (_currentTime == 0) {
           timer.cancel();
-          if (_gameInfo.roundNumber == _gameData.round &&
+          if (widget.gameInfo.roundNumber == widget.gameData.round &&
               _currentTeam == TeamNumber.team2) {
-            // print("FINISH");
-            // print("t1 tabu: ${_gameInfo.team1Tabu}");
-            // print("t2 tabu: ${_gameInfo.team2Tabu}");
-            // print("t1 correct: ${_gameInfo.team1Correct}");
-            // print("t1 correct: ${_gameInfo.team2Correct}");
-
             Navigator.pop(context);
             Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ResultScreen(
-                    gameInfo: _gameInfo,
+                    gameInfo: widget.gameInfo,
                   ),
                 ));
           } else {
-            _currentTime = _gameData.time.toInt();
-            _gameInfo.restart();
+            _currentTime = widget.gameData.time.toInt();
+            widget.gameInfo.restart();
             _currentTeam = (_currentTeam == TeamNumber.team1
                 ? TeamNumber.team2
                 : TeamNumber.team1);
@@ -86,11 +67,11 @@ class _PlayScreenState extends State<PlayScreen> {
                 roundTimer();
               },
               context: context,
-              currentTeam: _currentTeam,
-              teamData: _teamData,
-              round: _gameInfo.roundNumber,
+              currentTeam: _currentTeam == TeamNumber.team1 ? widget.gameInfo.team1 : widget.gameInfo.team2,
+              team: _currentTeam == TeamNumber.team1 ? widget.gameInfo.team2 : widget.gameInfo.team1,
+              round: widget.gameInfo.roundNumber,
             );
-            if (_currentTeam == TeamNumber.team1) _gameInfo.roundNumber++;
+            if (_currentTeam == TeamNumber.team1) widget.gameInfo.roundNumber++;
           }
         }
       });
@@ -111,18 +92,14 @@ class _PlayScreenState extends State<PlayScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            TeamInGameCard(currentTeam: _currentTeam, teamData: _teamData),
+            TeamInGameCard(team: _currentTeam == TeamNumber.team1 ? widget.gameInfo.team1 : widget.gameInfo.team2),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Container(
                 decoration: BoxDecoration(
                   color: kSliderActiveColor,
-                  border: Border.all(
-                    color: Color(0xFFfce2ce),
-                    width: 4.0
-                  ),
+                  border: Border.all(color: Color(0xFFfce2ce), width: 4.0),
                   borderRadius: BorderRadius.circular(10.0),
-
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -137,11 +114,11 @@ class _PlayScreenState extends State<PlayScreen> {
                   child: ResultButton(
                     color: kPrimaryColor,
                     borderRadius:
-                    BorderRadius.only(topRight: Radius.circular(10.0)),
+                        BorderRadius.only(topRight: Radius.circular(10.0)),
                     text: 'TABU',
                     icon: Icons.sentiment_very_dissatisfied,
                     onTap: () {
-                      _gameInfo.tabu(_currentTeam);
+                      widget.gameInfo.tabu(_currentTeam);
                       setState(() {
                         _questionBank.getQuestion();
                       });
@@ -158,20 +135,18 @@ class _PlayScreenState extends State<PlayScreen> {
                     icon: Icons.block,
                     onTap: () {
                       if (_currentTeam == TeamNumber.team1 &&
-                          _gameInfo.team1Pass < _gameData.pass) {
-                        _gameInfo.pass(_currentTeam);
+                          widget.gameInfo.team1.pass < widget.gameData.pass) {
+                        widget.gameInfo.pass(_currentTeam);
                         setState(() {
                           _questionBank.getQuestion();
                         });
                       } else if (_currentTeam == TeamNumber.team2 &&
-                          _gameInfo.team2Pass < _gameData.pass) {
-                        _gameInfo.pass(_currentTeam);
+                          widget.gameInfo.team2.pass < widget.gameData.pass) {
+                        widget.gameInfo.pass(_currentTeam);
                         setState(() {
                           _questionBank.getQuestion();
                         });
                       }
-                      // print("Team1: ${_gameInfo.team1Pass}");
-                      // print("Team2: ${_gameInfo.team2Pass}");
                     },
                   ),
                 ),
@@ -179,13 +154,18 @@ class _PlayScreenState extends State<PlayScreen> {
                   child: ResultButton(
                     color: kSliderActiveColor,
                     borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(10.0)),
+                        BorderRadius.only(topLeft: Radius.circular(10.0)),
                     text: 'DOĞRU',
                     icon: Icons.sentiment_very_satisfied,
                     onTap: () {
-                      _gameInfo.correct(_currentTeam);
+                      widget.gameInfo.correct(_currentTeam);
                       setState(() {
                         _questionBank.getQuestion();
+                        try {
+
+                        }catch(e) {
+
+                        }
                       });
                     },
                   ),
@@ -193,47 +173,6 @@ class _PlayScreenState extends State<PlayScreen> {
               ],
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TeamInGameCard extends StatelessWidget {
-  final TeamNumber currentTeam;
-  final TeamData teamData;
-  final TextStyle textStyle;
-  final EdgeInsets margin;
-
-  TeamInGameCard(
-      {this.currentTeam, this.teamData, this.margin, this.textStyle});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: margin == null
-          ? EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0)
-          : margin,
-      color: currentTeam == TeamNumber.team1
-          ? teamData.team1.teamColor
-          : teamData.team2.teamColor,
-      elevation: 8.0,
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-        leading: Icon(
-          currentTeam == TeamNumber.team1
-              ? teamData.team1.teamIcon
-              : teamData.team2.teamIcon,
-          size: 60.0,
-        ),
-        title: Text(
-          currentTeam == TeamNumber.team1
-              ? teamData.team1.teamName
-              : teamData.team2.teamName,
-          textAlign: TextAlign.center,
-          style: textStyle == null
-              ? kTeamTextStyle.copyWith(fontSize: 35.0)
-              : textStyle,
         ),
       ),
     );

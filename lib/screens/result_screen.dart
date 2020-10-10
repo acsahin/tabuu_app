@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_info.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -16,9 +15,8 @@ class ResultScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
-          color: kPrimaryBackgroundColor,
           child: gameInfo.theWinner(),
-        ),
+        )
       ),
     );
   }

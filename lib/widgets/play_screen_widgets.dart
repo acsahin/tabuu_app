@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/team_data.dart';
-import 'package:tabuu_app/screens/play_screen.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 
 class ResultButton extends StatelessWidget {
@@ -45,8 +44,8 @@ class ResultButton extends StatelessWidget {
 void showMyDialog({
   Function onTap,
   BuildContext context,
-  TeamNumber currentTeam,
-  TeamData teamData,
+  TeamModel currentTeam,
+  TeamModel team,
   int round,
 }) {
   showDialog(
@@ -77,23 +76,17 @@ void showMyDialog({
                     color: kSliderActiveColor,
                   ),
                   child: Text(
-                      currentTeam == TeamNumber.team1
-                          ? '${teamData.team2.teamName}\n' +
+                          '${team.teamName}\n' +
                           '$round' +
                           '. raundu bitirdi.\n' +
-                          'Sıradaki takım:'
-                          : '${teamData.team1.teamName}\n' +
-                              '$round' +
-                              '. raundu bitirdi.\n' +
-                              'Sıradaki takım:',
+                          'Sıradaki takım:',
                       textAlign: TextAlign.center,
                       style: kSettingsTextStyle.copyWith(fontSize: 24, backgroundColor: kSliderActiveColor)),
                 ),
               ),
             ),
             TeamInGameCard(
-              currentTeam: currentTeam,
-              teamData: teamData,
+              team: currentTeam,
               textStyle: kTeamLowerTextStyle,
               margin: EdgeInsets.all(20.0),
             ),
@@ -106,4 +99,40 @@ void showMyDialog({
       ),
     ),
   );
+}
+
+class TeamInGameCard extends StatelessWidget {
+final TeamModel team;
+final TextStyle textStyle;
+final EdgeInsets margin;
+
+TeamInGameCard(
+    {this.team, this.margin, this.textStyle});
+
+@override
+Widget build(BuildContext context) {
+  return Card(
+    margin: margin == null
+        ? EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0)
+        : margin,
+    color: team.teamColor,
+    elevation: 8.0,
+    child: ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+      leading: Icon(
+        team.teamIcon,
+        size: 50.0,
+      ),
+      title: Text(
+        team.teamName,
+        overflow: TextOverflow.visible,
+        softWrap: false,
+        textAlign: TextAlign.left,
+        style: textStyle == null
+            ? kTeamTextStyle.copyWith(fontSize: 35.0)
+            : textStyle,
+      ),
+    ),
+  );
+}
 }

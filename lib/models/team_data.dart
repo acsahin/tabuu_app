@@ -10,6 +10,10 @@ class TeamModel{
   Color teamColor;
   IconData teamIcon;
   String teamName;
+  int correct = 0;
+  int pass = 0;
+  int tabu = 0;
+  int point;
 
   TeamModel({this.teamColor, this.teamIcon, this.teamName});
 

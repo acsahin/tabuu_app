@@ -4,18 +4,26 @@ import 'package:tabuu_app/constants.dart';
 
 class QuestionBank {
   List<dynamic> questionList;
+  List usedList;
   List<Widget> currentQuestion;
 
   QuestionBank({this.questionList});
 
+  void remake() {
+    usedList = List.from(questionList);
+  }
+
   void getQuestion() {
+    if(usedList.length == 0) {
+      remake();
+    }
     Random random = Random();
-    int a = random.nextInt(questionList.length);
+    int a = random.nextInt(usedList.length);
     currentQuestion =  [
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          questionList[a]['title'],
+          usedList[a]['title'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 32, color: Color(0xFFfce2ce), fontWeight: FontWeight.bold),
         ),
@@ -27,7 +35,7 @@ class QuestionBank {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          questionList[a]['tabu1'],
+          usedList[a]['tabu1'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, color: kPrimaryColor, fontWeight: FontWeight.bold),
         ),
@@ -35,7 +43,7 @@ class QuestionBank {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          questionList[a]['tabu2'],
+          usedList[a]['tabu2'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, color: kPrimaryColor, fontWeight: FontWeight.bold),
         ),
@@ -43,7 +51,7 @@ class QuestionBank {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          questionList[a]['tabu3'],
+          usedList[a]['tabu3'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, color: kPrimaryColor, fontWeight: FontWeight.bold),
         ),
@@ -51,7 +59,7 @@ class QuestionBank {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          questionList[a]['tabu4'],
+          usedList[a]['tabu4'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, color: kPrimaryColor, fontWeight: FontWeight.bold),
         ),
@@ -59,13 +67,13 @@ class QuestionBank {
       Padding(
         padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16.0),
         child: Text(
-          questionList[a]['tabu5'],
+          usedList[a]['tabu5'],
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 24, color: kPrimaryColor, fontWeight: FontWeight.bold),
         ),
       ),
     ];
-    questionList.removeAt(a);
+    usedList.removeAt(a);
     // print(currentQuestion);
   }
 }

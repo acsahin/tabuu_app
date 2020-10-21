@@ -1,10 +1,10 @@
 import 'package:firebase_admob/firebase_admob.dart';
 
 class AdmobService {
-  MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(testDevices: ["66D2486B163BE87D5DB810CC0579341B"]);
-  String _bannerID = "ca-app-pub-3004337159530698/5722381221";
-  String _interID = "ca-app-pub-3004337159530698/7493793742";
-  String _rewardID = "ca-app-pub-3004337159530698/2290402678";
+  MobileAdTargetingInfo _targetingInfo = MobileAdTargetingInfo(testDevices: ["YOUR-TESTING-DEVICE-ID"]);
+  String _bannerID = BannerAd.testAdUnitId;
+  String _interID = InterstitialAd.testAdUnitId;
+  String _rewardID = RewardedVideoAd.testAdUnitId;
   InterstitialAd _interstitialAd;
   BannerAd _bannerAd;
 

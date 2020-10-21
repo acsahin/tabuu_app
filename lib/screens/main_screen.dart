@@ -1,14 +1,18 @@
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/models/team_data.dart';
+import 'package:tabuu_app/services/admob_service.dart';
 import 'package:tabuu_app/widgets/main_screen_widgets.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/constants.dart';
 
 class MainScreen extends StatelessWidget {
+  AdmobService _admobService = AdmobService();
 
   @override
   Widget build(BuildContext context) {
+    _admobService.createBannerAd()..load()..show();
     return Scaffold(
       appBar: AppBar(
         title: Text('Tabu TR'),
@@ -20,6 +24,7 @@ class MainScreen extends StatelessWidget {
           children: <Widget>[
             MainScreenButton(
               onTap: () {
+                _admobService.disposeBannerAd();
                 showDialog(
                   context: context,
                   builder: (_) => Center(
@@ -32,10 +37,6 @@ class MainScreen extends StatelessWidget {
             MainScreenButton(
               onTap: () {},
               title: 'YARDIM',
-            ),
-            MainScreenButton(
-              onTap: () {},
-              title: 'HAKKINDA',
             ),
           ],
         ),
@@ -50,6 +51,21 @@ class SettingsDialog extends StatefulWidget {
 }
 
 class _SettingsDialogState extends State<SettingsDialog> {
+  final AdmobService _admobService = AdmobService();
+
+  @override
+  void initState() {
+    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
+    _admobService.createInterstitialAd()..load()..show();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _admobService.disposeInterstitialAd();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     TeamData teamData = TeamData();
@@ -87,7 +103,9 @@ class _SettingsDialogState extends State<SettingsDialog> {
                 gameData: gameData,
               ),
               MainScreenButton(
-                onTap: () {},
+                onTap: () {
+
+                },
                 title: 'BAŞLAT',
                 gameData: gameData,
                 teamData: teamData,

@@ -57,7 +57,7 @@ class TeamResult extends StatelessWidget {
       child: Container(
         color: backgroundColor,
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -82,12 +82,32 @@ class TeamResult extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 80.0),
+                padding: const EdgeInsets.only(top: 30.0),
                 child: Text(
                   '${team.point} PUAN',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30.0,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Text(
+                  '${team.correct} doğru',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Text(
+                  '${team.tabu} yanlış',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15.0,
                   ),
                 ),
               ),

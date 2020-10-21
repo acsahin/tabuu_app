@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tabuu_app/constants.dart';
 import 'package:tabuu_app/models/game_data.dart';
 import 'package:tabuu_app/screens/result_screen.dart';
-import 'package:tabuu_app/service/question_bank.dart';
+import 'package:tabuu_app/services/admob_service.dart';
+import 'package:tabuu_app/services/question_bank.dart';
 import 'dart:async';
 import 'package:tabuu_app/widgets/play_screen_widgets.dart';
 import 'package:tabuu_app/models/game_info.dart';
@@ -21,12 +23,15 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
+  final AdmobService _admobService = AdmobService();
   QuestionBank _questionBank;
   int _currentTime;
   TeamNumber _currentTeam;
 
+
   @override
   void initState() {
+    FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
     super.initState();
     _questionBank = QuestionBank(questionList: jsonDecode(widget.questionData));
     _questionBank.remake();
@@ -36,12 +41,17 @@ class _PlayScreenState extends State<PlayScreen> {
     roundTimer();
   }
 
+  @override
+  void dispose() {
+    _admobService.disposeInterstitialAd();
+    super.dispose();
+  }
+
   void roundTimer() {
     if (!mounted) return;
     Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
         _currentTime--;
-        //print(_currentTime);
         if (_currentTime == 0) {
           timer.cancel();
           if (widget.gameInfo.roundNumber == widget.gameData.round &&

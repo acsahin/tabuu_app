@@ -12,7 +12,8 @@ class MainScreenButton extends StatelessWidget {
   final GameData gameData;
   final TeamData teamData;
 
-  MainScreenButton({this.onTap, @required this.title, this.teamData, this.gameData});
+  MainScreenButton(
+      {this.onTap, @required this.title, this.teamData, this.gameData});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,8 @@ class MainScreenButton extends StatelessWidget {
         ),
         onPressed: title == 'BAŞLAT'
             ? () async {
-                String data = await rootBundle.loadString('images/questions.json');
+                String data =
+                    await rootBundle.loadString('assets/questions.json');
                 Navigator.pop(context);
                 Navigator.push(
                     context,
@@ -33,7 +35,8 @@ class MainScreenButton extends StatelessWidget {
                       builder: (context) => PlayScreen(
                         gameData: gameData,
                         questionData: data,
-                        gameInfo: GameInfo(team1: teamData.team1, team2: teamData.team2),
+                        gameInfo: GameInfo(
+                            team1: teamData.team1, team2: teamData.team2),
                       ),
                     ));
               }
@@ -79,8 +82,9 @@ class _TeamCardState extends State<TeamCard> {
           ),
           title: TextField(
             decoration: InputDecoration(
-              hintText:
-                  widget.selectedTeam == TeamNumber.team1 ? '1. Takım' : '2. Takım',
+              hintText: widget.selectedTeam == TeamNumber.team1
+                  ? '1. Takım'
+                  : '2. Takım',
               border: InputBorder.none,
             ),
             onChanged: (newName) {
@@ -95,7 +99,6 @@ class _TeamCardState extends State<TeamCard> {
     );
   }
 }
-
 
 class SettingsCard extends StatefulWidget {
   final String title;
@@ -120,17 +123,17 @@ class _SettingsCardState extends State<SettingsCard> {
   }
 
   void configure() {
-    if(widget.title == 'saniye') {
+    if (widget.title == 'saniye') {
       _min = 5.0;
       _max = 180.0;
       _divisions = 160;
       _value = widget.gameData.time;
-    }else if(widget.title == 'raund') {
+    } else if (widget.title == 'raund') {
       _min = 2.0;
       _max = 10.0;
       _divisions = 8;
       _value = widget.gameData.round;
-    }else if(widget.title == 'pas') {
+    } else if (widget.title == 'pas') {
       _min = 0.0;
       _max = 10.0;
       _divisions = 10;
@@ -153,11 +156,11 @@ class _SettingsCardState extends State<SettingsCard> {
             max: _max,
             value: _value,
             onChanged: (newValue) {
-              if(widget.title == 'saniye') {
+              if (widget.title == 'saniye') {
                 widget.gameData.changeTime(newValue);
-              }else if(widget.title == 'raund') {
+              } else if (widget.title == 'raund') {
                 widget.gameData.changeRound(newValue);
-              }else if(widget.title == 'pas') {
+              } else if (widget.title == 'pas') {
                 widget.gameData.changePass(newValue);
               }
               setState(() {

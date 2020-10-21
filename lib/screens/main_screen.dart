@@ -34,10 +34,6 @@ class MainScreen extends StatelessWidget {
               },
               title: 'OYNA',
             ),
-            MainScreenButton(
-              onTap: () {},
-              title: 'YARDIM',
-            ),
           ],
         ),
       ),

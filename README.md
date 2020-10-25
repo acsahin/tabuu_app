@@ -1,4 +1,4 @@
-<img src="logo.pnc" align="center" >
+<img src="logo.png" align="center" >
 
 # Tabu App
 

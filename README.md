@@ -1,3 +1,5 @@
+<img src="logo.pnc" align="center" >
+
 # Tabu App
 
 Tabu application (Only Turkish), available on Play Store

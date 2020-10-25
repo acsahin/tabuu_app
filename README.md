@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.png" height="100em" width="100em"/>
+  <img src="logo.png" height="200em" width="200em"/>
 </p>
 
 # Tabu App
